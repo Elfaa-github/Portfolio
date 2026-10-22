@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html class="js" lang="en" style="scroll-behavior: smooth;">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Experience &amp; Leadership - Zahra Elfatima</title>
+<meta name="description" content="Laboratory teaching assistance, organizational secretariat governance, student welfare initiatives, and human-centered digital design.">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --reveal-distance: 24px;
+  --reveal-duration: 650ms;
+  --reveal-stagger: 80ms;
+  --reveal-easing: cubic-bezier(0.16, 1, 0.3, 1);
+}
+html, body { width: 100%; overflow-x: hidden; margin: 0; padding: 0; }
+body { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important; line-height: 1.65; }
+h1, h2, h3, .font-serif { font-family: 'Newsreader', Georgia, serif !important; font-weight: 400; }
+.font-label-mono, .font-label-mono-bold { font-family: 'Geist', sans-serif !important; }
+code, pre, .font-mono { font-family: 'Geist Mono', monospace !important; }
+.material-symbols-outlined { font-family: 'Material Symbols Outlined' !important; }
+::-webkit-scrollbar { display: none; }
+section[id], article[id] { scroll-margin-top: 96px; }
+.section-heading-clamp { font-size: clamp(2.25rem, 6vw, 3.5rem) !important; line-height: 1.12 !important; }
+.touch-target-min { min-height: 44px; min-width: 44px; display: inline-flex; align-items: center; justify-content: center; }
+
+/* Scroll reveal */
+.reveal { transition: opacity var(--reveal-duration) var(--reveal-easing), transform var(--reveal-duration) var(--reveal-easing); transition-delay: calc(var(--stagger-index, 0) * var(--reveal-stagger)); will-change: opacity, transform; }
+html.js .reveal:not(.is-visible) { opacity: 0 !important; transform: translateY(var(--reveal-distance)) !important; }
+html.js .reveal.is-visible { opacity: 1 !important; transform: translateY(0) !important; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal, html.js .reveal:not(.is-visible) { opacity: 1 !important; transform: none !important; transition: none !important; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+noscript .reveal { opacity: 1 !important; transform: none !important; }
+
+/* Floating decorative blobs */
+@keyframes heroFloat1 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes heroFloat2 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+.hero-blob-float-1 { animation: heroFloat1 16s ease-in-out infinite; }
+.hero-blob-float-2 { animation: heroFloat2 14s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .hero-blob-float-1, .hero-blob-float-2 { animation: none !important; } }
+
+/* Navbar glass pill (same as landing page) */
+.nav-glass { background: rgba(255,255,255,.55); -webkit-backdrop-filter: blur(14px) saturate(140%); backdrop-filter: blur(14px) saturate(140%); border: 1px solid rgba(255,255,255,.7); box-shadow: 0 4px 20px rgba(94,143,110,.08), inset 0 1px 0 rgba(255,255,255,.8); padding: 6px; border-radius: 9999px; }
+.nav-desktop-link { position: relative; isolation: isolate; transition: color .25s ease, transform .25s ease; }
+.nav-desktop-link::before { content: ""; position: absolute; inset: 0; border-radius: inherit; z-index: -1; opacity: 0; background: linear-gradient(135deg, rgba(205,235,221,.95) 0%, rgba(255,255,255,.65) 55%, rgba(212,236,234,.85) 100%); box-shadow: inset 0 0 0 1px rgba(255,255,255,.75), 0 6px 16px rgba(94,143,110,.16); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); transition: opacity .25s ease; }
+.nav-desktop-link:hover, .nav-desktop-link:focus-visible { color: #042013; transform: translateY(-1px); }
+.nav-desktop-link:hover::before, .nav-desktop-link:focus-visible::before { opacity: 1; }
+a:focus-visible, button:focus-visible { outline: 2px solid #366648; outline-offset: 3px; }
+
+/* Mobile nav */
+#mobile-nav-toggle { display: none; transition: background-color 200ms ease, transform 120ms ease; }
+@media (max-width: 767px) { #mobile-nav-toggle { display: flex !important; } }
+@media (min-width: 768px) { #mobile-nav-toggle, #mobile-nav-panel { display: none !important; } }
+@media (hover: hover) { #mobile-nav-toggle:hover { background-color: #BFE3D0 !important; } }
+#mobile-nav-toggle:active { background-color: #B3DBC5 !important; transform: scale(.95); }
+#mobile-nav-panel .mobile-nav-link { transition: background-color 200ms ease, color 200ms ease, transform 120ms ease; }
+@media (hover: hover) { #mobile-nav-panel .mobile-nav-link:not(.active):hover { background-color: rgba(205,235,221,.55); color: #052018; } }
+#mobile-nav-panel .mobile-nav-link:not(.active):active { background-color: #CDEBDD; transform: scale(.98); }
+
+/* Experience cards */
+.exp-card { transition: box-shadow .3s ease, border-color .3s ease, transform .3s cubic-bezier(.16,1,.3,1); }
+.exp-card:hover { border-color: rgba(94,143,110,.3); box-shadow: 0 18px 40px rgba(94,143,110,.16); }
+.exp-card:target { border-color: rgba(54,102,72,.55); box-shadow: 0 0 0 4px rgba(94,143,110,.18), 0 18px 40px rgba(94,143,110,.18); }
+.exp-figure img { transition: transform .5s cubic-bezier(.16,1,.3,1); }
+@media (hover: hover) { .exp-figure:hover img { transform: scale(1.04); } }
+
+/* Pill / button hovers */
+.pill-link { transition: background-color .2s ease, box-shadow .2s ease, transform .2s ease; }
+.pill-link:hover { box-shadow: 0 6px 16px rgba(94,143,110,.18); }
+.pill-link .arrow { display: inline-block; transition: transform .25s ease; }
+.pill-link:hover .arrow { transform: translate(2px,-2px); }
+</style>
+
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+tailwind.config = { darkMode: "class", theme: { extend: { colors: {
+  primary: "#366648", "primary-container": "#4e7f5f", "on-primary": "#ffffff",
+  secondary: "#705a4a", "secondary-container": "#f8dac6", surface: "#e8ffee",
+  "on-surface": "#042013", "on-surface-variant": "#414942",
+  "surface-container-lowest": "#ffffff", "surface-container-low": "#dbfce5",
+  "surface-container": "#d5f6df", "surface-container-high": "#cff0da",
+  "tertiary-fixed": "#cbe9db", "on-tertiary-fixed": "#052018", outline: "#717971"
+} } } };
+</script>
+<noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
+</head>
+
+<body class="bg-[#FBF8F1] text-[#042013] antialiased selection:bg-[#CDEBDD] selection:text-[#042013]">
+
+<!-- ============ HEADER ============ -->
+<header class="fixed top-0 w-full z-50 bg-[#FBF8F1]/85 backdrop-blur-xl border-b border-[#5E8F6E]/10">
+  <div class="h-16 md:h-20 max-w-[1280px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 flex items-center justify-between">
+    <a aria-label="Elfa portfolio home" class="flex items-center gap-1 group touch-target-min" href="index.html">
+      <span class="font-serif text-3xl tracking-tight text-[#042013] group-hover:text-[#366648] transition-colors">elfa</span>
+      <span class="w-2 h-2 rounded-full bg-[#705A4A] inline-block mt-2"></span>
+    </a>
+
+    <div class="hidden md:flex items-center gap-2 sm:gap-6">
+      <nav aria-label="Primary" class="nav-glass flex items-center gap-1 sm:gap-1.5">
+        <a class="nav-desktop-link text-[#414942] font-semibold rounded-full px-3.5 sm:px-4 py-2 text-xs sm:text-sm transition-all duration-300 touch-target-min" href="index.html#selected-projects">Work</a>
+        <a class="nav-desktop-link text-[#414942] font-semibold rounded-full px-3.5 sm:px-4 py-2 text-xs sm:text-sm transition-all duration-300 touch-target-min" href="index.html#about">About</a>
+        <a aria-current="page" class="nav-desktop-link bg-[#CDEBDD] text-[#052018] font-semibold rounded-full px-3.5 sm:px-4 py-2 text-xs sm:text-sm transition-all duration-300 touch-target-min" href="experience.html">Experience</a>
+        <a class="nav-desktop-link text-[#414942] font-semibold rounded-full px-3.5 sm:px-4 py-2 text-xs sm:text-sm transition-all duration-300 touch-target-min" href="index.html#contact">Contact</a>
+      </nav>
+      <a aria-label="About Zahra - go to About section" class="w-9 h-9 sm:w-8 sm:h-8 rounded-full bg-[#366648] flex items-center justify-center shrink-0 touch-target-min transition-all duration-200 hover:scale-110 hover:bg-[#2E4A3A] hover:shadow-[0_4px_12px_rgba(54,102,72,0.3)]" href="index.html#about" title="About me">
+        <span class="material-symbols-outlined text-white text-[18px]">person</span>
+      </a>
+    </div>
+
+    <button aria-controls="mobile-nav-panel" aria-expanded="false" aria-label="Toggle navigation menu" class="md:hidden w-11 h-11 rounded-full bg-[#CDEBDD] text-[#2E4A3A] items-center justify-center touch-target-min transition-colors shadow-xs" id="mobile-nav-toggle" type="button">
+      <span class="material-symbols-outlined text-[24px]" id="mobile-nav-icon">menu</span>
+    </button>
+  </div>
+
+  <div class="hidden md:hidden w-full bg-gradient-to-b from-white to-[#FBF8F1] border-b border-[#5E8F6E]/10 rounded-b-3xl shadow-md p-4" id="mobile-nav-panel">
+    <nav class="flex flex-col gap-1" aria-label="Mobile">
+      <a class="mobile-nav-link flex items-center h-12 px-4 rounded-2xl text-[#414942] font-medium text-base" href="index.html#selected-projects">Work</a>
+      <a class="mobile-nav-link flex items-center h-12 px-4 rounded-2xl text-[#414942] font-medium text-base" href="index.html#about">About</a>
+      <a aria-current="page" class="mobile-nav-link active flex items-center h-12 px-4 rounded-2xl bg-[#CDEBDD] text-[#052018] font-medium text-base" href="experience.html">Experience</a>
+      <a class="mobile-nav-link flex items-center h-12 px-4 rounded-2xl text-[#414942] font-medium text-base" href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="w-full pt-16 md:pt-20">
+
+  <!-- ============ PAGE HERO ============ -->
+  <section class="relative w-full overflow-hidden bg-gradient-to-b from-[#FBF8F1] via-[#F4FAF5] to-[#EAF5EE]" id="top">
+    <div aria-hidden="true" class="absolute inset-0 pointer-events-none overflow-hidden select-none">
+      <div class="absolute -top-16 -left-16 w-[320px] h-[320px] md:w-[460px] md:h-[460px] rounded-full blur-[40px] opacity-50 hero-blob-float-1" style="background: linear-gradient(135deg, rgb(205,235,221), rgb(212,236,234));"></div>
+      <div class="absolute top-[4%] right-[8%] md:right-[22%] w-[220px] h-[220px] md:w-[420px] md:h-[420px] rounded-full blur-[40px] opacity-45 hero-blob-float-2" style="background: linear-gradient(135deg, rgb(250,220,200), rgb(252,239,196));"></div>
+      <div class="absolute top-[34%] right-[18%] w-[14px] h-[14px] rounded-full" style="background-color:#FADCC8; opacity:.85; box-shadow:0 6px 14px rgba(94,143,110,.18);"></div>
+      <div class="hidden md:block absolute top-[48%] right-[6%] w-[12px] h-[12px] rounded-full" style="background-color:#CDEBDD; opacity:.9; box-shadow:0 6px 14px rgba(94,143,110,.18);"></div>
+      <div class="hidden md:block absolute bottom-[14%] left-[45%] w-[10px] h-[10px] rounded-full" style="background-color:#FCEFC4; opacity:.9; box-shadow:0 6px 14px rgba(94,143,110,.18);"></div>
+      <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none" style="height:90px;">
+        <svg class="w-full h-full" fill="none" preserveAspectRatio="none" viewBox="0 0 1440 100"><path d="M0,45 C280,85 580,20 880,72 C1160,115 1340,35 1440,50 L1440,100 L0,100 Z" fill="#CDEBDD" style="opacity:.6;"></path></svg>
+      </div>
+    </div>
+
+    <div class="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 pt-10 sm:pt-12 pb-20 sm:pb-24">
+      <a class="inline-flex items-center gap-1.5 text-sm font-semibold text-[#366648] hover:text-[#2E4A3A] transition-colors touch-target-min -ml-1 px-1" href="index.html">
+        <span aria-hidden="true" class="material-symbols-outlined text-[18px]">arrow_back</span>
+        <span>Back to Portfolio</span>
+      </a>
+
+      <div class="mt-3 flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+        <div class="max-w-2xl">
+          <h1 class="font-serif section-heading-clamp text-[#042013] tracking-tight">Experience <span class="italic text-[#366648] text-[0.72em]">&amp; Leadership</span></h1>
+          <p class="mt-5 text-base md:text-lg text-[#414942] leading-relaxed max-w-xl">Laboratory teaching assistance, organizational secretariat governance, student welfare initiatives, and human-centered digital design.</p>
+          <div class="mt-5 flex items-center gap-5 text-sm text-[#414942]">
+            <span class="inline-flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-[#5E8F6E] ring-4 ring-[#CDEBDD]"></span>Ongoing</span>
+            <span class="inline-flex items-center gap-2"><span class="w-3 h-3 rounded-full border-2 border-[#5E8F6E] bg-transparent"></span>Completed</span>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <a class="pill-link inline-flex items-center justify-center gap-1.5 rounded-full border-[1.5px] border-[#5E8F6E] text-[#2E4A3A] text-sm font-semibold px-6 h-11 hover:bg-[#CDEBDD]/50" href="https://drive.google.com/file/d/1HoWjBnKPPlZnfeDCEtMcweR340YUpBxg/view?usp=sharing" rel="noreferrer noopener" target="_blank" aria-label="View CV (opens in a new tab)">
+            <span>View CV</span><span class="arrow text-xs" aria-hidden="true">↗</span>
+          </a>
+          <a class="pill-link inline-flex items-center justify-center gap-1.5 rounded-full border-[1.5px] border-[#5E8F6E] text-[#2E4A3A] text-sm font-semibold px-6 h-11 hover:bg-[#CDEBDD]/50" href="https://www.linkedin.com/in/zahra-elfatima-481960319" rel="noreferrer noopener" target="_blank" aria-label="LinkedIn profile (opens in a new tab)">
+            <span>LinkedIn</span><span class="arrow text-xs" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TIMELINE ============ -->
+  <section class="relative z-10 w-full bg-gradient-to-b from-[#EAF5EE] via-[#F4FAF5] to-[#EBF6F2]" id="experience">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 pt-12 sm:pt-14 pb-20 sm:pb-24">
+      <div class="relative w-full pl-8 sm:pl-12 lg:pl-16">
+        <div aria-hidden="true" class="absolute left-3 sm:left-4 lg:left-5 top-6 bottom-6 w-[2px] -translate-x-1/2 bg-[#5E8F6E]/30 rounded-full"></div>
+
+        <div class="space-y-8 sm:space-y-10">
+
+          <!-- 1. Basic Science Laboratory Assistant (ongoing) -->
+          <article class="relative reveal" id="exp-lab-assistant" style="--stagger-index: 0;">
+            <div aria-hidden="true" class="absolute left-[-20px] sm:left-[-32px] lg:left-[-44px] top-9 w-6 h-6 -translate-x-1/2 rounded-full bg-[#CDEBDD] border-2 border-white flex items-center justify-center shadow-md">
+              <span class="w-2.5 h-2.5 rounded-full bg-[#5E8F6E]"></span>
+            </div>
+            <div class="exp-card rounded-[28px] border border-white/70 bg-gradient-to-br from-white via-[#F4FAF5] to-[#CDEBDD]/60 p-6 sm:p-8 lg:p-10 shadow-[0_12px_32px_rgba(94,143,110,0.10)]">
+              <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-6">
+                <div>
+                  <h2 class="font-serif text-2xl sm:text-3xl lg:text-4xl text-[#1a3627] font-medium tracking-tight">Basic Science Laboratory Assistant</h2>
+                  <p class="mt-2 font-label-mono text-sm font-semibold text-[#366648]">DTETI FT UGM</p>
+                </div>
+                <span class="inline-flex items-center gap-2 self-start shrink-0 px-3.5 py-1.5 rounded-full bg-[#CDEBDD] border border-white/80 shadow-xs font-label-mono text-xs font-bold text-[#1a3627]">
+                  <span class="w-2 h-2 rounded-full bg-[#366648]"></span>Aug 2026 – Present
+                </span>
+              </div>
+
+              <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+                <div class="lg:col-span-5">
+                  <p class="text-base text-[#414942] leading-relaxed">Guiding engineering students in analog and digital electronics, equipment calibration, and laboratory safety protocols.</p>
+                  <ul class="mt-5 space-y-2.5 text-[15px] text-[#1a3627]">
+                    <li class="flex items-start gap-3"><span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-[#5E8F6E] shrink-0"></span>Supporting circuit experiments</li>
+                    <li class="flex items-start gap-3"><span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-[#5E8F6E] shrink-0"></span>Operating oscilloscopes</li>
+                    <li class="flex items-start gap-3"><span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-[#5E8F6E] shrink-0"></span>Signal analysis</li>
+                    <li class="flex items-start gap-3"><span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-[#5E8F6E] shrink-0"></span>Troubleshooting circuit setups</li>
+                  </ul>
+                </div>
+                <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <figure class="exp-figure">
+                    <div class="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-white border border-white/80 shadow-sm">
+                      <img alt="Circuit experiment workstation with bench power supply and breadboard prototype" class="w-full h-full object-cover" loading="lazy" src="images/experience-basic-science-laboratory.png">
+                    </div>
+                    <figcaption class="mt-3">
+                      <span class="block text-sm font-semibold text-[#042013] leading-snug">Circuit Experiment Workstation</span>
+                      <span class="block text-sm text-[#414942] leading-snug mt-0.5">Bench power supply and breadboard prototype setup</span>
+                    </figcaption>
+                  </figure>
+                  <figure class="exp-figure">
+                    <div class="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-white border border-white/80 shadow-sm">
+                      <img alt="Oscilloscope displaying a sine waveform" class="w-full h-full object-cover" loading="lazy" src="images/experience-basic-science-assistant.png">
+                    </div>
+                    <figcaption class="mt-3">
+                      <span class="block text-sm font-semibold text-[#042013] leading-snug">Oscilloscope Waveform &amp; Signal Logs</span>
+                      <span class="block text-sm text-[#414942] leading-snug mt-0.5">Frequency response curves and ripple readings</span>
+                    </figcaption>
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 2. Secretariat Division Staff (completed) -->
+          <article class="relative reveal" id="exp-secretariat" style="--stagger-index: 1;">
+            <div aria-hidden="true" class="absolute left-[-20px] sm:left-[-32px] lg:left-[-44px] top-9 w-6 h-6 -translate-x-1/2 rounded-full bg-[#FBF8F1] border-2 border-[#5E8F6E] shadow-md"></div>
+            <div class="exp-card rounded-[28px] border border-white/70 bg-gradient-to-br from-white via-[#F4FAF5] to-[#D4ECEA]/60 p-6 sm:p-8 lg:p-10 shadow-[0_12px_32px_rgba(94,143,110,0.10)]">
+              <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-6">
+                <div>
+                  <h2 class="font-serif text-2xl sm:text-3xl lg:text-4xl text-[#1a3627] font-medium tracking-tight">Secretariat Division Staff</h2>
+                  <p class="mt-2 font-label-mono text-sm font-semibold text-[#366648]">Teknisiade FT UGM</p>
+                </div>
+                <span class="inline-flex items-center self-start shrink-0 px-3.5 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs font-medium text-[#414942]">May 2026 – Sep 2026</span>
+              </div>
+
+              <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+                <div class="lg:col-span-5">
+                  <p class="text-base text-[#414942] leading-relaxed">Managed event records, prepared official documents, and coordinated with different divisions during Teknisiade.</p>
+                  <ul class="mt-5 space-y-2.5 text-[15px] text-[#1a3627]">
+                    <li class="flex items-start gap-3"><span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-[#5E8F6E] shrink-0"></span>Participant registration</li>
+                    <li class="flex items-start gap-3"><span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-[#5E8F6E] shrink-0"></span>Document verification</li>
+                    <li class="flex items-start gap-3"><span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-[#5E8F6E] shrink-0"></span>Attendance records</li>
+                    <li class="flex items-start gap-3"><span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-[#5E8F6E] shrink-0"></span>Coordination across divisions</li>
+                  </ul>
+                </div>
+                <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <figure class="exp-figure">
+                    <div class="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-white border border-white/80 shadow-sm">
+                      <img alt="Secretariat team in front of the Teknisiade banner" class="w-full h-full object-cover" loading="lazy" src="images/experience-teknisiade.png">
+                    </div>
+                    <figcaption class="mt-3">
+                      <span class="block text-sm font-semibold text-[#042013] leading-snug">Participant Verification &amp; Registration Matrix</span>
+                      <span class="block text-sm text-[#414942] leading-snug mt-0.5">Structured intake and validation records</span>
+                    </figcaption>
+                  </figure>
+                  <figure class="exp-figure">
+                    <div class="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-white border border-white/80 shadow-sm">
+                      <img alt="Teknisiade closing ceremony group photo with flower bouquets" class="w-full h-full object-cover" loading="lazy" src="images/experience-closing-teknisiade.png">
+                    </div>
+                    <figcaption class="mt-3">
+                      <span class="block text-sm font-semibold text-[#042013] leading-snug">Cross-Divisional Coordination Schedule</span>
+                      <span class="block text-sm text-[#414942] leading-snug mt-0.5">Timeline alignment for ceremonies and venue crew</span>
+                    </figcaption>
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 3. UI/UX Designer (completed) -->
+          <article class="relative reveal" id="exp-uiux" style="--stagger-index: 2;">
+            <div aria-hidden="true" class="absolute left-[-20px] sm:left-[-32px] lg:left-[-44px] top-9 w-6 h-6 -translate-x-1/2 rounded-full bg-[#FBF8F1] border-2 border-[#5E8F6E] shadow-md"></div>
+            <div class="exp-card rounded-[28px] border border-white/70 bg-gradient-to-br from-white via-[#FFFBF7] to-[#FADCC8]/55 p-6 sm:p-8 lg:p-10 shadow-[0_12px_32px_rgba(94,143,110,0.10)]">
+              <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-6">
+                <div>
+                  <h2 class="font-serif text-2xl sm:text-3xl lg:text-4xl text-[#1a3627] font-medium tracking-tight">UI/UX Designer</h2>
+                  <p class="mt-2 font-label-mono text-sm font-semibold text-[#366648]">Google Developer Groups on Campus UGM</p>
+                </div>
+                <span class="inline-flex items-center self-start shrink-0 px-3.5 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs font-medium text-[#414942]">Dec 2025 – Jun 2026</span>
+              </div>
+
+              <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+                <div class="lg:col-span-5">
+                  <p class="text-base text-[#414942] leading-relaxed">Led design sprints and designed intuitive interfaces for EventHub, a platform connecting event organizers with potential sponsors, using consistent and reusable design components.</p>
+                  <ul class="mt-5 space-y-2.5 text-[15px] text-[#1a3627]">
+                    <li class="flex items-start gap-3"><span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-[#705A4A] shrink-0"></span>User research</li>
+                    <li class="flex items-start gap-3"><span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-[#705A4A] shrink-0"></span>Wireframing</li>
+                    <li class="flex items-start gap-3"><span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-[#705A4A] shrink-0"></span>Prototyping</li>
+                    <li class="flex items-start gap-3"><span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-[#705A4A] shrink-0"></span>Usability testing</li>
+                  </ul>
+                  <a class="pill-link mt-6 inline-flex items-center gap-1.5 font-semibold text-sm text-[#2E4A3A] hover:text-[#366648] transition-colors" href="index.html#selected-projects">
+                    <span>See EventHub in Selected Projects</span><span class="arrow text-xs" aria-hidden="true">↗</span>
+                  </a>
+                </div>
+                <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <figure class="exp-figure">
+                    <div class="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-white border border-white/80 shadow-sm">
+                      <img alt="EventHub landing page design in Figma" class="w-full h-full object-cover object-top" loading="lazy" src="images/experience-eventhub.png">
+                    </div>
+                    <figcaption class="mt-3">
+                      <span class="block text-sm font-semibold text-[#042013] leading-snug">Design System &amp; Prototype Flow</span>
+                      <span class="block text-sm text-[#414942] leading-snug mt-0.5">Figma component system and responsive screens</span>
+                    </figcaption>
+                  </figure>
+                  <figure class="exp-figure">
+                    <div class="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-[#1D2E24] border border-white/80 shadow-sm">
+                      <img alt="Figma workspace showing the EventHub user journey and usability test artifacts" class="w-full h-full object-cover" loading="lazy" src="images/experience-figma-eventhub.png">
+                    </div>
+                    <figcaption class="mt-3">
+                      <span class="block text-sm font-semibold text-[#042013] leading-snug">User Journey &amp; Usability Test Artifacts</span>
+                      <span class="block text-sm text-[#414942] leading-snug mt-0.5">Session observations and task-completion notes</span>
+                    </figcaption>
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 4. Student Welfare Staff (ongoing) -->
+          <article class="relative reveal" id="exp-welfare" style="--stagger-index: 3;">
+            <div aria-hidden="true" class="absolute left-[-20px] sm:left-[-32px] lg:left-[-44px] top-9 w-6 h-6 -translate-x-1/2 rounded-full bg-[#FCEFC4] border-2 border-white flex items-center justify-center shadow-md">
+              <span class="w-2.5 h-2.5 rounded-full bg-[#5E8F6E]"></span>
+            </div>
+            <div class="exp-card rounded-[28px] border border-white/70 bg-gradient-to-br from-white via-[#FFFDF5] to-[#FCEFC4]/65 p-6 sm:p-8 lg:p-10 shadow-[0_12px_32px_rgba(94,143,110,0.10)]">
+              <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-6">
+                <div>
+                  <h2 class="font-serif text-2xl sm:text-3xl lg:text-4xl text-[#1a3627] font-medium tracking-tight">Student Welfare Staff</h2>
+                  <p class="mt-2 font-label-mono text-sm font-semibold text-[#366648]">KMTETI UGM</p>
+                </div>
+                <span class="inline-flex items-center gap-2 self-start shrink-0 px-3.5 py-1.5 rounded-full bg-[#CDEBDD] border border-white/80 shadow-xs font-label-mono text-xs font-bold text-[#1a3627]">
+                  <span class="w-2 h-2 rounded-full bg-[#366648]"></span>Jan 2025 – Present
+                </span>
+              </div>
+
+              <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+                <div class="lg:col-span-5">
+                  <p class="text-base text-[#414942] leading-relaxed">Supporting student welfare and academic initiatives through peer guidance, departmental support, information management, and communication materials.</p>
+                  <ul class="mt-5 space-y-2.5 text-[15px] text-[#1a3627]">
+                    <li class="flex items-start gap-3"><span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-[#5E8F6E] shrink-0"></span>Tutor recruitment</li>
+                    <li class="flex items-start gap-3"><span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-[#5E8F6E] shrink-0"></span>Academic data collection</li>
+                    <li class="flex items-start gap-3"><span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-[#5E8F6E] shrink-0"></span>Poster design</li>
+                    <li class="flex items-start gap-3"><span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-[#5E8F6E] shrink-0"></span>Instagram feed and social media content</li>
+                  </ul>
+                </div>
+                <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <figure class="exp-figure">
+                    <div class="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-white border border-white/80 shadow-sm">
+                      <img alt="Adkesma division team group photo" class="w-full h-full object-cover" loading="lazy" src="images/experience-adkesma.png">
+                    </div>
+                    <figcaption class="mt-3">
+                      <span class="block text-sm font-semibold text-[#042013] leading-snug">Tutor Recruitment &amp; Coordination</span>
+                      <span class="block text-sm text-[#414942] leading-snug mt-0.5">Managed tutor recruitment and course coordinator placements</span>
+                    </figcaption>
+                  </figure>
+                  <figure class="exp-figure">
+                    <div class="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-white border border-white/80 shadow-sm">
+                      <img alt="Instagram feed carousels and infographics designed for welfare schedules" class="w-full h-full object-cover" loading="lazy" src="images/experience-feed-instagram-adkesma.png">
+                    </div>
+                    <figcaption class="mt-3">
+                      <span class="block text-sm font-semibold text-[#042013] leading-snug">Student Welfare Instagram Feeds</span>
+                      <span class="block text-sm text-[#414942] leading-snug mt-0.5">Carousels and infographics for welfare schedules</span>
+                    </figcaption>
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT CTA ============ -->
+  <section class="relative w-full bg-gradient-to-b from-[#EBF6F2] to-[#EAF5EE]" id="contact">
+    <div class="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 pb-16 sm:pb-20">
+      <div class="reveal relative overflow-hidden rounded-[28px] sm:rounded-[36px] border border-white/70 bg-gradient-to-br from-white via-[#F4FAF5] to-[#D4ECEA]/60 p-6 sm:p-10 lg:p-12 shadow-[0_20px_48px_rgba(94,143,110,0.12)]">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-8">
+          <div class="max-w-xl">
+            <h2 class="font-serif text-3xl sm:text-4xl text-[#2E4A3A] tracking-tight">Let's <span class="italic text-[#366648]">Collaborate</span></h2>
+            <p class="mt-3 text-base text-[#414942]">Interested in my work or want to talk? Let's connect.</p>
+          </div>
+          <div class="flex flex-wrap items-center gap-3">
+            <a class="inline-flex items-center justify-center gap-2 bg-[#366648] hover:bg-[#2E4A3A] text-white font-semibold text-[15px] px-7 h-12 rounded-full shadow-[0_8px_20px_rgba(54,102,72,0.22)] transition-all" href="mailto:zahraelfa1406@gmail.com">
+              <span>Email me</span>
+            </a>
+            <a class="pill-link inline-flex items-center justify-center gap-2 rounded-full border-[1.5px] border-[#5E8F6E] text-[#2E4A3A] font-semibold text-[15px] px-7 h-12 hover:bg-[#CDEBDD]/50" href="index.html#selected-projects">
+              <span>View Projects</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-full overflow-hidden leading-none -mb-[1px]">
+      <svg aria-hidden="true" class="block w-full h-12 lg:h-20 text-[#DCE9DB]" preserveAspectRatio="none" viewBox="0 0 1200 120"><path d="M0,0 C300,90 600,10 900,60 C1050,85 1150,30 1200,0 L1200,120 L0,120 Z" fill="currentColor"></path></svg>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="w-full bg-[#DCE9DB] py-8">
+  <div class="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 flex flex-col items-center text-center md:flex-row md:justify-between gap-4">
+    <div class="flex items-center gap-2 justify-center">
+      <a class="font-serif text-xl tracking-tight text-[#042013] hover:text-[#366648] transition-colors" href="index.html">elfa.</a>
+      <span class="text-xs text-[#717971] font-label-mono uppercase tracking-wider">• BASED IN YOGYAKARTA, INDONESIA</span>
+    </div>
+    <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs text-[#414942] font-label-mono uppercase tracking-wider">
+      <a class="hover:text-[#366648] py-1 transition-colors touch-target-min" href="#top">BACK TO TOP ↑</a>
+      <a class="hover:text-[#366648] py-1 transition-colors touch-target-min" href="index.html#selected-projects">PROJECTS (04)</a>
+      <a class="hover:text-[#366648] py-1 transition-colors touch-target-min" href="https://github.com/Elfaa-github" rel="noreferrer noopener" target="_blank"><span class="inline-flex items-center gap-1">GITHUB <svg aria-hidden="true" class="w-[14px] h-[14px] stroke-current" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"></path></svg></span></a>
+      <a class="hover:text-[#366648] py-1 transition-colors touch-target-min" href="https://www.linkedin.com/in/zahra-elfatima-481960319" rel="noreferrer noopener" target="_blank"><span class="inline-flex items-center gap-1">LINKEDIN <svg aria-hidden="true" class="w-[14px] h-[14px] stroke-current" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"></path></svg></span></a>
+    </div>
+    <div class="text-xs text-[#717971] font-label-mono uppercase tracking-wider">© 2026 ELFA. CRAFTED WITH CARE.</div>
+  </div>
+</footer>
+
+<script>
+// Mobile navigation toggle
+(function () {
+  var btn = document.getElementById('mobile-nav-toggle');
+  var panel = document.getElementById('mobile-nav-panel');
+  var icon = document.getElementById('mobile-nav-icon');
+  if (!btn || !panel || !icon) return;
+  function toggle(open) {
+    var isOpen = open !== undefined ? open : panel.classList.contains('hidden');
+    panel.classList.toggle('hidden', !isOpen);
+    btn.setAttribute('aria-expanded', String(isOpen));
+    icon.textContent = isOpen ? 'close' : 'menu';
+  }
+  btn.addEventListener('click', function () { toggle(); });
+  panel.querySelectorAll('.mobile-nav-link').forEach(function (l) {
+    l.addEventListener('click', function () { toggle(false); });
+  });
+  window.addEventListener('resize', function () { if (window.innerWidth >= 768) toggle(false); });
+})();
+
+// Scroll reveal
+(function () {
+  var items = document.querySelectorAll('.reveal');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if ('IntersectionObserver' in window && !reduce) {
+    var io = new IntersectionObserver(function (entries, obs) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    items.forEach(function (el) { io.observe(el); });
+    // Make sure a card opened via #hash from the landing page is visible immediately
+    if (location.hash) {
+      var target = document.querySelector(location.hash);
+      if (target && target.classList.contains('reveal')) target.classList.add('is-visible');
+    }
+  } else {
+    items.forEach(function (el) { el.classList.add('is-visible'); });
+  }
+})();
+
+// Image extension fallback: if images/xxx.png is not found, try .jpg, .jpeg, .webp, .PNG, .JPG
+(function () {
+  var exts = ['png', 'jpg', 'jpeg', 'webp', 'PNG', 'JPG', 'JPEG'];
+  document.querySelectorAll('img[src^="images/"]').forEach(function (img) {
+    img.addEventListener('error', function handler() {
+      var m = img.getAttribute('src').match(/^(.*)\.([A-Za-z]+)$/);
+      if (!m) return;
+      var tried = (img.dataset.tried || m[2]).split(',');
+      var next = exts.find(function (x) { return tried.indexOf(x) === -1; });
+      if (!next) { img.removeEventListener('error', handler); return; }
+      tried.push(next);
+      img.dataset.tried = tried.join(',');
+      img.src = m[1] + '.' + next;
+    });
+  });
+})();
+</script>
+</body>
+</html>
