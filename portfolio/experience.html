@@ -24,22 +24,6 @@ code, pre, .font-mono { font-family: 'Geist Mono', monospace !important; }
 .material-symbols-outlined { font-family: 'Material Symbols Outlined' !important; }
 ::-webkit-scrollbar { display: none; }
 
-/* Sembunyikan polkadot dekoratif di HP dan tablet */
-@media (max-width: 99999px) {
-  #hero-section > svg.absolute,
-  #hero-section [class*="hero-circle-"] {
-    display: none !important;
-  }
-}
-
-/* Label "Better solutions through tech" hanya muncul di layar lebar (>= 1280px),
-   tempat ruangnya cukup dan tidak menimpa kartu */
-@media (max-width: 1279px) {
-  .hero-collage-container > .top-4.right-6 {
-    display: none !important;
-  }
-}
-
 section[id], article[id] { scroll-margin-top: 96px; }
 .section-heading-clamp { font-size: clamp(2.25rem, 6vw, 3.5rem) !important; line-height: 1.12 !important; }
 .touch-target-min { min-height: 44px; min-width: 44px; display: inline-flex; align-items: center; justify-content: center; }
