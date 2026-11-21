@@ -152,6 +152,75 @@ html.js .reveal.is-visible {
 }
 
 ::-webkit-scrollbar { display: none; }
+/* ---------- Design gallery (bento overlay) ---------- */
+.gallery-trigger { position: relative; display: block; width: 100%; padding: 0; border: 0; background: none; text-align: left; cursor: zoom-in; border-radius: 1rem; }
+.gallery-chip { position: absolute; right: 12px; bottom: 12px; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 9999px; background: rgba(255,255,255,.92); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); box-shadow: 0 4px 14px rgba(94,143,110,.22); font-size: 12px; font-weight: 600; color: #1a3627; transition: transform .25s ease, background-color .25s ease; }
+.gallery-chip .material-symbols-outlined { font-size: 16px; }
+.gallery-trigger:hover .gallery-chip { transform: translateY(-2px); background: #fff; }
+
+html.gallery-lock, html.gallery-lock body { overflow: hidden; }
+.gallery-dialog { padding: 0; border: 0; margin: 0; width: 100vw; max-width: 100vw; height: 100vh; height: 100dvh; max-height: 100dvh; background: linear-gradient(to bottom, #FBF8F1, #F4FAF5 45%, #EAF5EE); color: #042013; overflow: hidden; }
+.gallery-dialog::backdrop { background: rgba(4,32,19,.55); }
+.gallery-dialog[open] { animation: galleryIn .45s cubic-bezier(.16,1,.3,1); }
+@keyframes galleryIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+.gallery-shell { height: 100%; overflow-y: auto; overscroll-behavior: contain; }
+.gallery-head { position: sticky; top: 0; z-index: 5; background: rgba(251,248,241,.88); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(94,143,110,.12); }
+.gallery-head-inner, .gallery-body { max-width: 1088px; margin: 0 auto; padding-left: 16px; padding-right: 16px; }
+@media (min-width: 640px) { .gallery-head-inner, .gallery-body { padding-left: 24px; padding-right: 24px; } }
+.gallery-head-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 16px; padding-bottom: 16px; }
+.gallery-body { padding-top: 28px; padding-bottom: 72px; }
+.gallery-sub { margin: 0 0 24px; font-size: 15px; color: #414942; }
+.gallery-btn { display: inline-flex; align-items: center; gap: 6px; height: 44px; padding: 0 20px; border-radius: 9999px; border: 1.5px solid #5E8F6E; background: transparent; color: #2E4A3A; font-size: 14px; font-weight: 600; cursor: pointer; transition: background-color .2s ease, box-shadow .2s ease; white-space: nowrap; }
+.gallery-btn:hover { background: rgba(205,235,221,.5); box-shadow: 0 6px 16px rgba(94,143,110,.18); }
+.gallery-btn .material-symbols-outlined { font-size: 18px; }
+.gallery-btn[hidden] { display: none; }
+.gallery-icon-btn { width: 44px; height: 44px; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 9999px; border: 1.5px solid #5E8F6E; background: transparent; color: #2E4A3A; cursor: pointer; transition: background-color .2s ease, box-shadow .2s ease; }
+.gallery-icon-btn:hover { background: rgba(205,235,221,.5); box-shadow: 0 6px 16px rgba(94,143,110,.18); }
+.gallery-icon-btn .material-symbols-outlined { font-size: 22px; }
+.gallery-titles { display: flex; flex-direction: column; gap: 6px; }
+.gallery-titles p { margin: 0; line-height: 1.3; }
+.gallery-titles h2 { margin: 0; line-height: 1.15; }
+@media (max-width: 479px) { #gallery-close { width: 44px; padding: 0; justify-content: center; } #gallery-close > span:first-child { display: none; } }
+
+/* bento: tiap baris dibagi sesuai rasio asli gambar -> tinggi sama, gambar tampil utuh tanpa terpotong */
+.bento { display: flex; flex-direction: column; gap: 28px; }
+.bento-row { display: flex; gap: 16px; align-items: flex-start; }
+.bento-tile { margin: 0; min-width: 0; flex: var(--r) 1 0%; }
+.bento-frame { display: block; width: 100%; aspect-ratio: var(--r); padding: 0; border: 1px solid rgba(255,255,255,.85); border-radius: 20px; overflow: hidden; background: #fff; box-shadow: 0 12px 32px rgba(94,143,110,.12); cursor: zoom-in; transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s ease; }
+.bento-frame img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .5s cubic-bezier(.16,1,.3,1); }
+@media (hover: hover) { .bento-frame:hover { transform: translateY(-3px); box-shadow: 0 18px 40px rgba(94,143,110,.2); } .bento-frame:hover img { transform: scale(1.03); } }
+.bento-cap { margin-top: 10px; }
+.bento-cap strong { display: block; font-size: 14px; font-weight: 600; color: #042013; line-height: 1.35; }
+.bento-cap span { display: block; margin-top: 2px; font-size: 13px; color: #414942; line-height: 1.35; }
+@media (max-width: 639px) {
+  .bento { display: block; column-count: 2; column-gap: 12px; }
+  .bento-row { display: contents; }
+  .bento-tile { break-inside: avoid; margin-bottom: 18px; }
+  .bento-tile.is-wide { column-span: all; }
+}
+
+/* viewer (lihat satu desain lebih besar) */
+.viewer[hidden] { display: none; }
+.viewer-stage { display: grid; grid-template-columns: 44px minmax(0,1fr) 44px; align-items: center; gap: 12px; }
+@media (max-width: 639px) { .viewer-stage { grid-template-columns: 36px minmax(0,1fr) 36px; gap: 8px; } }
+.viewer-nav { width: 44px; height: 44px; border-radius: 9999px; border: 1.5px solid #5E8F6E; background: rgba(255,255,255,.8); color: #2E4A3A; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; transition: background-color .2s ease; }
+@media (max-width: 639px) { .viewer-nav { width: 36px; height: 36px; } }
+.viewer-nav:hover { background: #CDEBDD; }
+.viewer-nav:disabled { opacity: .35; cursor: default; }
+.viewer-figure { margin: 0; display: flex; flex-direction: column; align-items: center; min-width: 0; }
+.viewer-img { display: block; max-width: 100%; max-height: calc(100vh - 270px); max-height: calc(100dvh - 270px); width: auto; height: auto; border-radius: 18px; background: #fff; box-shadow: 0 18px 48px rgba(94,143,110,.2); }
+.viewer-cap { margin-top: 16px; text-align: center; }
+.viewer-cap strong { display: block; font-size: 16px; font-weight: 600; color: #042013; }
+.viewer-cap span { display: block; margin-top: 2px; font-size: 14px; color: #414942; }
+.viewer-cap .viewer-count { margin-top: 8px; font-size: 12px; letter-spacing: .08em; color: #717971; }
+
+/* bento split: satu kolom tinggi + dua tile bertumpuk */
+.bento-split { display: flex; gap: 16px; align-items: flex-start; }
+.bento-col { flex: var(--w) 1 0%; min-width: 0; display: flex; flex-direction: column; gap: 16px; }
+.bento-col .bento-tile { flex: none; width: 100%; }
+@media (max-width: 639px) { .bento-split, .bento-col { display: contents; } }
+
+@media (max-width: 639px) { #tech-grid:not(.is-expanded) > .tech-extra { display: none; } }
 </style><noscript><style>
 .reveal { opacity: 1 !important; transform: none !important; }
 .hero-left-stagger { opacity: 1 !important; transform: none !important; }
@@ -194,7 +263,25 @@ html.js .reveal.is-visible {
     }
   }
 </style>
-</head>
+<script>(function(){
+  var RESTORE_ON_INTERNAL_LINK=true; // false = only browser Back/Forward restores
+  if('scrollRestoration' in history){history.scrollRestoration='auto';}
+  var KEY='scrollY:'+location.pathname;
+  function save(){try{sessionStorage.setItem(KEY,String(Math.round(window.pageYOffset||0)));}catch(e){}}
+  window.addEventListener('pagehide',save);
+  document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden'){save();}});
+  var nav=(performance.getEntriesByType&&performance.getEntriesByType('navigation')[0])||{};
+  var fromSite=false;try{var r=new URL(document.referrer);fromSite=r.origin===location.origin&&r.pathname!==location.pathname;}catch(e){}
+  var should=nav.type==='back_forward'||(RESTORE_ON_INTERNAL_LINK&&nav.type==='navigate'&&fromSite&&!location.hash);
+  if(!should){return;}
+  var y=0;try{y=parseInt(sessionStorage.getItem(KEY)||'0',10)||0;}catch(e){}
+  if(y<=0){return;}
+  var de=document.documentElement,prev=de.style.scrollBehavior;
+  function go(){de.style.scrollBehavior='auto';window.scrollTo(0,y);de.style.scrollBehavior=prev;}
+  go();
+  window.addEventListener('DOMContentLoaded',go);
+  window.addEventListener('load',function(){go();setTimeout(go,150);setTimeout(go,500);});
+})();</script></head>
 
 <body class="bg-[#FBF8F1] text-[#042013] antialiased selection:bg-[#CDEBDD] selection:text-[#042013] overflow-x-auto"><svg aria-hidden="true" class="inline-defs-container" style="position:absolute;width:0;height:0;overflow:hidden"></svg>
 <!-- Header (No reveal class) -->
@@ -233,7 +320,7 @@ html.js .reveal.is-visible {
 <pattern height="20" id="dot-pattern" patternUnits="userSpaceOnUse" width="20" x="0" y="0"><circle cx="2.5" cy="2.5" r="2"></circle></pattern>
 <rect fill="url(#dot-pattern)" height="100" width="100"></rect>
 </svg>
-<section class="relative z-10 max-w-[1280px] w-full mx-auto px-4 sm:px-6 md:px-10 lg:px-16 pt-8 sm:pt-12 lg:pt-16 pb-16 sm:pb-20 lg:pb-28"><div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center"><div class="w-full max-w-2xl lg:max-w-none mx-auto lg:col-span-5 flex flex-col items-start space-y-6"><span class="hero-left-stagger font-label-mono-bold text-xs uppercase tracking-widest text-[#366648]/80 font-bold" data-hero-left="1">Zahra Elfatima</span><h1 class="hero-left-stagger font-serif text-[#042013] hero-heading-clamp text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.08]" data-hero-left="2">Designing useful <br><span class="font-normal">digital experiences.</span><br><span class="italic text-[#366648] font-normal">Building intelligent systems.</span></h1><p class="hero-left-stagger text-base md:text-lg text-[#414942] max-w-lg leading-relaxed" data-hero-left="3">I'm Elfa, an Information Technology student at Universitas Gadjah Mada (UGM) working at the intersection of human-centered UI/UX design, applied AI, and dependable software systems.</p><div class="hero-left-stagger flex flex-wrap items-center gap-3 sm:gap-4 pt-2 w-full" data-hero-left="4"><a class="w-full min-[400px]:w-auto inline-flex items-center justify-center gap-2 bg-[#366648] hover:bg-[#4e7f5f] text-white font-semibold text-[15px] px-6 sm:px-7 py-3.5 h-12 rounded-full shadow-[0_8px_20px_rgba(54,102,72,0.22)] transition-all touch-target-min" href="#selected-projects"><span class="">Explore my work</span><span aria-hidden="true" class="material-symbols-outlined text-[18px]">arrow_forward</span></a><a aria-label="View Zahra Elfatima's CV (opens in a new tab)" class="w-full min-[400px]:w-auto inline-flex items-center justify-center gap-2 bg-white/80 hover:bg-white text-[#042013] font-semibold text-[15px] px-5 sm:px-6 py-3.5 h-12 rounded-full shadow-sm transition-all touch-target-min" href="https://drive.google.com/file/d/1HoWjBnKPPlZnfeDCEtMcweR340YUpBxg/view?usp=sharing" rel="noreferrer noopener" target="_blank"><span class="">View CV</span><span aria-hidden="true" class="material-symbols-outlined text-[17px]">north_east</span></a></div><div class="hero-left-stagger flex items-center gap-3 pt-2" data-hero-left="5"><a aria-label="GitHub Profile" class="w-11 h-11 rounded-full bg-white/90 hover:bg-white flex items-center justify-center text-[#366648] shadow-sm hover:scale-105 transition-all touch-target-min" href="https://github.com/Elfaa-github" rel="noreferrer noopener" target="_blank" title="GitHub"><svg aria-hidden="true" class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" fill-rule="evenodd"></path></svg></a><a aria-label="LinkedIn Profile" class="w-11 h-11 rounded-full bg-white/90 hover:bg-white flex items-center justify-center text-[#366648] shadow-sm hover:scale-105 transition-all touch-target-min" href="https://www.linkedin.com/in/zahra-elfatima-481960319" rel="noreferrer noopener" target="_blank" title="LinkedIn"><svg aria-hidden="true" class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg></a><a aria-label="Send an email to Zahra Elfatima" class="w-11 h-11 rounded-full bg-white/90 hover:bg-white flex items-center justify-center text-[#366648] shadow-sm hover:scale-105 transition-all touch-target-min" href="mailto:zahraelfa1406@gmail.com" title="Email"><span aria-hidden="true" class="material-symbols-outlined text-[19px]">mail</span></a></div></div><div class="lg:col-span-7 relative flex justify-center items-center w-full max-w-[520px] lg:max-w-none mx-auto aspect-[1/1.05] lg:aspect-auto lg:min-h-[640px] select-none hero-collage-container overflow-visible"><svg class="absolute -top-6 left-6 w-32 h-32 text-[#366648]/20 pointer-events-none transform -rotate-12" fill="currentColor" viewBox="0 0 100 100"><path d="M50 95 C50 95 48 60 20 40 C45 45 50 65 50 65 C50 65 55 40 80 30 C60 48 50 95 50 95 Z" opacity="0.4"></path><path d="M50 65 C50 65 30 35 10 25 C30 25 45 45 50 50 C50 50 60 25 85 15 C70 30 50 65 50 65 Z" opacity="0.6"></path></svg><!-- Order 2: EventHub frame --><div class="hero-frame-anim absolute top-2 left-0 sm:left-4 w-[90%] lg:w-[410px] z-10" data-hero-frame="2" id="hero-frame-eventhub" style="transform: translate3d(0px, 0px, 0px) rotate(-3deg);"><div class="relative w-full -rotate-3 hover:rotate-0 transition-transform duration-500"><div class="absolute -top-3.5 left-6 w-24 h-5 bg-[#FADCC8]/95 rotate-3 rounded-xs shadow-sm z-30 pointer-events-none border border-white/60 flex items-center justify-center"><span class="w-14 h-[1px] bg-[#705A4A]/20"></span></div><div class="relative z-10 w-full rounded-[24px] bg-white border border-white/90 shadow-[0_20px_48px_rgba(94,143,110,0.18)] p-2.5 sm:p-3 flex flex-col"><div class="relative w-full aspect-[16/10] rounded-[12px] overflow-hidden bg-gradient-to-br from-[#e8ffee] to-white shadow-inner flex items-center justify-center"><img alt="EventHub Landing Page" class="w-full h-full object-cover object-top" src="images/hero-eventhub.png"></div><div class="w-full pt-1.5 pb-0.5 flex items-center justify-center"><div class="w-16 h-1.5 rounded-full bg-[#DCE9DB]"></div></div></div></div></div><!-- Order 1: Back frame (Difference Map / satellite imagery) --><div class="hero-frame-anim relative z-20 w-[84%] lg:w-[460px]" data-hero-frame="1" id="hero-frame-back" style="transform: translate3d(0px, 0px, 0px) rotate(1deg);"><div class="w-full bg-white shadow-[0_20px_50px_rgba(54,102,72,0.18)] rotate-1 hover:rotate-0 transition-transform duration-500 rounded-[24px] p-2.5 sm:p-3 relative"><div class="absolute -top-3.5 left-1/2 -translate-x-1/2 w-32 h-6 bg-[#FADCC8]/95 rotate-1 rounded-xs shadow-sm flex items-center justify-center z-30"><span class="w-16 h-[1px] bg-[#705A4A]/20"></span></div><div class="w-full rounded-[12px] overflow-hidden bg-[#dbfce5] border border-[#d5f6df]"><div class="relative w-full aspect-[16/10] bg-gradient-to-br from-[#e8ffee] to-white flex items-center justify-center"><img alt="Post-disaster building damage assessment aerial satellite imagery" class="w-full h-full object-cover object-top" src="images/hero-difference-map.png"></div></div></div></div><!-- Order 3: UK Road Safety PCA card --><div class="hero-frame-anim absolute -bottom-6 left-1 sm:left-6 w-[62%] lg:w-[320px] z-30" data-hero-frame="3" id="hero-frame-pca" style="transform: translate3d(0px, 0px, 0px) rotate(-3deg);"><div class="w-full bg-white/95 shadow-[0_14px_40px_rgba(54,102,72,0.15)] -rotate-3 hover:rotate-0 transition-transform duration-500 rounded-[24px] p-2.5 sm:p-3 relative"><div class="flex items-center justify-between pb-1.5 sm:pb-2"><span class="font-label-mono text-[11px] font-semibold text-[#042013]">UK Road Safety · PCA</span></div><div class="relative w-full aspect-[16/9] overflow-hidden bg-gradient-to-br from-[#e8ffee] to-white shadow-inner flex items-center justify-center rounded-[12px]"><img alt="Cumulative Explained Variance PCA Chart" class="absolute inset-0 w-full h-full object-cover object-top" src="images/hero-pca.png"><div class="absolute bottom-1.5 right-1.5 px-2 py-0.5 rounded-full bg-white/90 backdrop-blur-sm border border-white/80 shadow-xs flex items-center gap-1.5 z-10"><span class="w-1.5 h-1.5 rounded-full bg-[#27C93F]"></span><span class="font-label-mono text-[9px] font-bold text-[#042013]">94.51%</span></div></div></div></div><!-- Order 4: Dark code card --><div class="hero-frame-anim hidden sm:block absolute bottom-2 -right-2 sm:right-2 w-[58%] lg:w-[300px] z-30" data-hero-frame="4" id="hero-frame-code" style="transform: translate3d(0px, 0px, 0px) rotate(3deg);"><div class="w-full rounded-lg bg-[#15231B] text-[#D3E8DA] shadow-[0_16px_40px_rgba(0,0,0,0.22)] rotate-3 hover:rotate-0 transition-transform duration-500 overflow-hidden" style="padding: 14px;"><div class="flex items-center justify-between pb-2"><div class="flex items-center gap-1.5"><span class="w-2-rounded-full w-2 h-2 rounded-full bg-[#FF5F56]"></span><span class="w-2 h-2 rounded-full bg-[#FFBD2E]"></span><span class="w-2 h-2 rounded-full bg-[#27C93F]"></span><span class="ml-2 font-label-mono text-[10px] text-white/50">predict.py</span></div><span class="font-label-mono text-[10px] text-[#A7D9B6]">FastAPI</span></div><div class="mt-2 font-mono leading-[18px] text-[#CCE2D4]" style="font-size: clamp(9px, 1.2cqw, 10px);"><div style="white-space: nowrap;"><span class="" style="color: #fb7185;">from</span> <span class="" style="color: #6ee7b7;">fastapi</span> <span class="" style="color: #fb7185;">import</span> <span class="" style="color: #fde68a;">FastAPI</span></div><div class="" style="white-space: nowrap;"><span class="" style="color: #e2e8f0;">app</span> = <span class="" style="color: #fde68a;">FastAPI</span>()</div><div class="h-2" style="white-space: nowrap;"></div><div class="" style="white-space: nowrap;"><span class="" style="color: #22d3ee;">@app.post</span>(<span class="" style="color: #fcd34d;">"/v1/triage"</span>)</div><div class="" style="white-space: nowrap;"><span class="" style="color: #fb7185;">async def</span> <span class="" style="color: #67e8f9;">infer</span>(<span class="" style="color: #e2e8f0;">roi</span>: <span class="" style="color: #fde68a;">GeoJSON</span>):</div><div class="" style="white-space: nowrap;">&nbsp;&nbsp;<span class="" style="color: #e2e8f0;">pred</span> = <span class="" style="color: #67e8f9;">model</span>(<span class="" style="color: #e2e8f0;">roi</span>)</div><div class="" style="white-space: nowrap;">&nbsp;&nbsp;<span class="" style="color: #fb7185;">return</span> {<span class="" style="color: #fcd34d;">"status"</span>: <span class="" style="color: #fcd34d;">"ready"</span>}</div></div></div></div><div class="hidden md:flex absolute top-4 right-6 z-30 flex-col items-start pointer-events-none select-none"><div class="relative"><span class="font-serif italic text-[20px] leading-[1.25] text-[#2E4A3A] block">Better solutions<br>through tech</span><svg class="w-24 h-2 mt-0.5 overflow-visible" fill="none" viewBox="0 0 96 8"><path d="M2 4 Q 24 1, 48 4 T 94 4" fill="none" stroke="#F4C9AD" stroke-linecap="round" stroke-width="2"></path></svg></div><svg class="w-16 h-14 mt-1 -ml-4 overflow-visible text-[#2E4A3A]" fill="none" viewBox="0 0 64 56"><path d="M 48 6 C 36 28, 22 38, 10 44" fill="none" stroke="#2E4A3A" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M 21.9 45.8 L 10 44 L 15.7 33.5" fill="none" stroke="#2E4A3A" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></div></div></div></section>
+<section class="relative z-10 max-w-[1280px] w-full mx-auto px-4 sm:px-6 md:px-10 lg:px-16 pt-8 sm:pt-12 lg:pt-16 pb-16 sm:pb-20 lg:pb-28"><div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center"><div class="w-full max-w-2xl lg:max-w-none mx-auto lg:col-span-5 flex flex-col items-start space-y-6"><span class="hero-left-stagger font-label-mono-bold text-xs uppercase tracking-widest text-[#366648]/80 font-bold" data-hero-left="1">Zahra Elfatima</span><h1 class="hero-left-stagger font-serif text-[#042013] hero-heading-clamp text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.08]" data-hero-left="2">Designing useful <br><span class="font-normal">digital experiences.</span><br><span class="italic text-[#366648] font-normal">Building intelligent systems.</span></h1><p class="hero-left-stagger text-base md:text-lg text-[#414942] max-w-lg leading-relaxed" data-hero-left="3">I'm Elfa, an Information Technology student at Universitas Gadjah Mada (UGM) working at the intersection of human-centered UI/UX design, Data/AI, and dependable software systems.</p><div class="hero-left-stagger flex flex-wrap items-center gap-3 sm:gap-4 pt-2 w-full" data-hero-left="4"><a class="w-full min-[400px]:w-auto inline-flex items-center justify-center gap-2 bg-[#366648] hover:bg-[#4e7f5f] text-white font-semibold text-[15px] px-6 sm:px-7 py-3.5 h-12 rounded-full shadow-[0_8px_20px_rgba(54,102,72,0.22)] transition-all touch-target-min" href="#selected-projects"><span class="">Explore my work</span><span aria-hidden="true" class="material-symbols-outlined text-[18px]">arrow_forward</span></a><a aria-label="View Zahra Elfatima's CV (opens in a new tab)" class="w-full min-[400px]:w-auto inline-flex items-center justify-center gap-2 bg-white/80 hover:bg-white text-[#042013] font-semibold text-[15px] px-5 sm:px-6 py-3.5 h-12 rounded-full shadow-sm transition-all touch-target-min" href="https://drive.google.com/file/d/1HoWjBnKPPlZnfeDCEtMcweR340YUpBxg/view?usp=sharing" rel="noreferrer noopener" target="_blank"><span class="">View CV</span><span aria-hidden="true" class="material-symbols-outlined text-[17px]">north_east</span></a></div><div class="hero-left-stagger flex items-center gap-3 pt-2" data-hero-left="5"><a aria-label="GitHub Profile" class="w-11 h-11 rounded-full bg-white/90 hover:bg-white flex items-center justify-center text-[#366648] shadow-sm hover:scale-105 transition-all touch-target-min" href="https://github.com/Elfaa-github" rel="noreferrer noopener" target="_blank" title="GitHub"><svg aria-hidden="true" class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" fill-rule="evenodd"></path></svg></a><a aria-label="LinkedIn Profile" class="w-11 h-11 rounded-full bg-white/90 hover:bg-white flex items-center justify-center text-[#366648] shadow-sm hover:scale-105 transition-all touch-target-min" href="https://www.linkedin.com/in/zahra-elfatima-481960319" rel="noreferrer noopener" target="_blank" title="LinkedIn"><svg aria-hidden="true" class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg></a><a aria-label="Send an email to Zahra Elfatima" class="w-11 h-11 rounded-full bg-white/90 hover:bg-white flex items-center justify-center text-[#366648] shadow-sm hover:scale-105 transition-all touch-target-min" href="mailto:zahraelfa1406@gmail.com" title="Email"><span aria-hidden="true" class="material-symbols-outlined text-[19px]">mail</span></a></div></div><div class="lg:col-span-7 relative flex justify-center items-center w-full max-w-[520px] lg:max-w-none mx-auto aspect-[1/1.05] lg:aspect-auto lg:min-h-[640px] select-none hero-collage-container overflow-visible"><svg class="absolute -top-6 left-6 w-32 h-32 text-[#366648]/20 pointer-events-none transform -rotate-12" fill="currentColor" viewBox="0 0 100 100"><path d="M50 95 C50 95 48 60 20 40 C45 45 50 65 50 65 C50 65 55 40 80 30 C60 48 50 95 50 95 Z" opacity="0.4"></path><path d="M50 65 C50 65 30 35 10 25 C30 25 45 45 50 50 C50 50 60 25 85 15 C70 30 50 65 50 65 Z" opacity="0.6"></path></svg><!-- Order 2: EventHub frame --><div class="hero-frame-anim absolute top-2 left-0 sm:left-4 w-[90%] lg:w-[410px] z-10" data-hero-frame="2" id="hero-frame-eventhub" style="transform: translate3d(0px, 0px, 0px) rotate(-3deg);"><a aria-label="View the EventHub project" class="block rounded-[24px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#366648]" href="#project-eventhub"><div class="relative w-full -rotate-3 hover:rotate-0 transition-transform duration-500"><div class="absolute -top-3.5 left-6 w-24 h-5 bg-[#FADCC8]/95 rotate-3 rounded-xs shadow-sm z-30 pointer-events-none border border-white/60 flex items-center justify-center"><span class="w-14 h-[1px] bg-[#705A4A]/20"></span></div><div class="relative z-10 w-full rounded-[24px] bg-white border border-white/90 shadow-[0_20px_48px_rgba(94,143,110,0.18)] p-2.5 sm:p-3 flex flex-col"><div class="relative w-full aspect-[16/10] rounded-[12px] overflow-hidden bg-gradient-to-br from-[#e8ffee] to-white shadow-inner flex items-center justify-center"><img alt="EventHub Landing Page" class="w-full h-full object-cover object-top" src="images/hero-eventhub.png"></div><div class="w-full pt-1.5 pb-0.5 flex items-center justify-center"><div class="w-16 h-1.5 rounded-full bg-[#DCE9DB]"></div></div></div></div></a></div><!-- Order 1: Back frame (Difference Map / satellite imagery) --><div class="hero-frame-anim relative z-20 w-[84%] lg:w-[460px]" data-hero-frame="1" id="hero-frame-back" style="transform: translate3d(0px, 0px, 0px) rotate(1deg);"><a aria-label="View the Post-Disaster Damage Assessment project" class="block rounded-[24px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#366648]" href="#project-damage-assessment"><div class="w-full bg-white shadow-[0_20px_50px_rgba(54,102,72,0.18)] rotate-1 hover:rotate-0 transition-transform duration-500 rounded-[24px] p-2.5 sm:p-3 relative"><div class="absolute -top-3.5 left-1/2 -translate-x-1/2 w-32 h-6 bg-[#FADCC8]/95 rotate-1 rounded-xs shadow-sm flex items-center justify-center z-30"><span class="w-16 h-[1px] bg-[#705A4A]/20"></span></div><div class="w-full rounded-[12px] overflow-hidden bg-[#dbfce5] border border-[#d5f6df]"><div class="relative w-full aspect-[16/10] bg-gradient-to-br from-[#e8ffee] to-white flex items-center justify-center"><img alt="Post-disaster building damage assessment aerial satellite imagery" class="w-full h-full object-cover object-top" src="images/hero-difference-map.png"></div></div></div></a></div><!-- Order 3 slot (kiri): Thriftpedia --><div class="hero-frame-anim absolute -bottom-6 left-1 sm:left-6 w-[62%] lg:w-[360px] z-40" data-hero-frame="3" id="hero-frame-pca" style="transform: translate3d(0px, 0px, 0px) rotate(-3deg);"><a aria-label="Open Thriftpedia website (opens in a new tab)" class="block rounded-[24px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#366648]" href="https://thriftpedia.vercel.app/" rel="noopener noreferrer" target="_blank"><div class="w-full bg-white/95 shadow-[0_14px_40px_rgba(54,102,72,0.15)] -rotate-3 hover:rotate-0 transition-transform duration-500 rounded-[24px] p-2.5 sm:p-3 relative"><div class="flex items-center justify-start gap-1.5 pb-1.5 sm:pb-2"><span class="font-label-mono text-[11px] font-semibold text-[#042013]">Thriftpedia</span><span aria-hidden="true" class="text-[11px] font-semibold text-[#366648]">↗</span></div><div class="relative w-full aspect-[2/1] overflow-hidden rounded-[12px] bg-gradient-to-br from-[#e8ffee] to-white shadow-inner"><img alt="Thriftpedia website homepage" class="absolute inset-0 w-full h-full object-cover object-top" height="686" loading="lazy" src="images/thriftpedia-cover.webp" width="1372"></div></div></a></div><!-- Order 4 slot (kanan): UK Road Safety PCA --><div class="hero-frame-anim absolute bottom-2 right-0 sm:right-2 w-[56%] sm:w-[58%] lg:w-[310px] z-30" data-hero-frame="4" id="hero-frame-code" style="transform: translate3d(0px, 0px, 0px) rotate(3deg);"><a aria-label="View the UK Road Safety Data &amp; PCA project" class="block rounded-[24px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#366648]" href="#project-uk-road-safety"><div class="w-full bg-white/95 shadow-[0_14px_40px_rgba(54,102,72,0.15)] rotate-3 hover:rotate-0 transition-transform duration-500 rounded-[24px] p-2.5 sm:p-3 relative"><div class="flex items-center justify-between pb-1.5 sm:pb-2"><span class="font-label-mono text-[11px] font-semibold text-[#042013]">UK Road Safety · PCA</span></div><div class="relative w-full aspect-[16/9] overflow-hidden bg-gradient-to-br from-[#e8ffee] to-white shadow-inner flex items-center justify-center rounded-[12px]"><img alt="Cumulative Explained Variance PCA Chart" class="absolute inset-0 w-full h-full object-cover object-top" src="images/hero-pca.png"><div class="absolute bottom-1.5 right-1.5 px-2 py-0.5 rounded-full bg-white/90 backdrop-blur-sm border border-white/80 shadow-xs flex items-center gap-1.5 z-10"><span class="w-1.5 h-1.5 rounded-full bg-[#27C93F]"></span><span class="font-label-mono text-[9px] font-bold text-[#042013]">94.51%</span></div></div></div></a></div><div class="hidden md:flex absolute top-4 right-6 z-30 flex-col items-start pointer-events-none select-none"><div class="relative"><span class="font-serif italic text-[20px] leading-[1.25] text-[#2E4A3A] block">Better solutions<br>through tech</span><svg class="w-24 h-2 mt-0.5 overflow-visible" fill="none" viewBox="0 0 96 8"><path d="M2 4 Q 24 1, 48 4 T 94 4" fill="none" stroke="#F4C9AD" stroke-linecap="round" stroke-width="2"></path></svg></div><svg class="w-16 h-14 mt-1 -ml-4 overflow-visible text-[#2E4A3A]" fill="none" viewBox="0 0 64 56"><path d="M 48 6 C 36 28, 22 38, 10 44" fill="none" stroke="#2E4A3A" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M 21.9 45.8 L 10 44 L 15.7 33.5" fill="none" stroke="#2E4A3A" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></div></div></div></section>
 </div>
 <!-- ABOUT SECTION -->
 <section class="relative w-full overflow-hidden bg-gradient-to-b from-[#FBF8F1] via-[#EBF6F2] to-[#D4ECEA]" id="about">
@@ -259,7 +346,7 @@ html.js .reveal.is-visible {
 </div>
 </div>
 <!-- Featured Card (reveal) -->
-<div class="relative overflow-hidden rounded-[28px] sm:rounded-[32px] border border-white/60 bg-gradient-to-br from-[#DCE9DB]/70 via-[#FBF8F1] to-[#ffffff] shadow-[0_12px_32px_rgba(94,143,110,0.12)] p-4 sm:p-8 lg:p-12 mb-12 reveal">
+<div class="scroll-mt-28 relative overflow-hidden rounded-[28px] sm:rounded-[32px] border border-white/60 bg-gradient-to-br from-[#DCE9DB]/70 via-[#FBF8F1] to-[#ffffff] shadow-[0_12px_32px_rgba(94,143,110,0.12)] p-4 sm:p-8 lg:p-12 mb-12 reveal" id="project-damage-assessment">
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 <div class="lg:col-span-6 flex flex-col items-start gap-5">
 <h3 class="font-serif text-3xl sm:text-4xl text-[#1a3627] font-medium leading-tight tracking-tight">Post-Disaster Damage Assessment &amp; Triage System</h3>
@@ -294,29 +381,16 @@ html.js .reveal.is-visible {
 <div class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#FCEFC4]/45 border border-[#705A4A]/20 shadow-xs"><span class="material-symbols-outlined text-[14px] text-[#705A4A]">emoji_events</span><span class="font-label-mono text-[11px] font-semibold text-[#705A4A]">1st Place · AI Bootcamp</span></div>
 </div>
 <div class="w-full overflow-hidden bg-black shadow-inner relative rounded-2xl">
-<img alt="Post-disaster building damage assessment aerial satellite imagery" class="w-full h-auto object-cover max-h-[340px]" src="images/project-post-disaster.png">
+<a aria-label="View repository for Post-Disaster Damage Assessment &amp; Triage System on GitHub (opens in a new tab)" class="group block" href="https://github.com/Project-TETI/BOOTCAMP-AI" rel="noreferrer noopener" target="_blank"><img alt="Post-disaster building damage assessment aerial satellite imagery" class="w-full h-auto object-cover max-h-[340px] group-hover:scale-[1.03] transition-transform duration-500" src="images/project-post-disaster.png"></a>
 </div>
 </div>
 </div>
 </div>
 </div>
 <!-- 2 Col Projects with Stagger -->
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8"><div class="rounded-[24px] border border-white/60 bg-gradient-to-br from-[#FFFFFF] to-[#D4ECEA] p-7 lg:p-8 shadow-[0_12px_32px_rgba(94,143,110,0.12)] flex flex-col justify-between reveal" style="--stagger-index: 0;"><div class="flex flex-col items-start gap-3"><div><h3 class="font-serif text-2xl lg:text-3xl text-[#2E4A3A] font-medium tracking-tight">EventHub</h3><p class="font-label-mono text-xs uppercase tracking-wider text-[#705A4A] font-medium mt-1">AI-POWERED SPONSORSHIP PLATFORM</p></div><p class="text-sm lg:text-[15px] text-[#414942] leading-relaxed">Contributed to the design and frontend development of EventHub, an AI-powered platform connecting event organizers with potential sponsors. Designed user flows, wireframes, and interactive prototypes in Figma, and contributed to frontend implementation using Next.js, React, TypeScript, and Tailwind CSS.</p><div class="w-full rounded-2xl overflow-hidden bg-white border border-white/80 shadow-sm mt-2"><img alt="EventHub Dashboard Preview" class="w-full aspect-[16/10] object-cover object-top" src="images/project-eventhub.png"></div></div><div class="pt-6"><a aria-label="View repository for EventHub on GitHub (opens in a new tab)" class="inline-flex items-center gap-1.5 font-semibold text-sm text-[#2E4A3A] hover:text-[#366648] transition-colors" href="https://github.com/Gigvo/eventhub-frontend" rel="noreferrer noopener" target="_blank"><span class="">View repository</span><span aria-hidden="true" class="material-symbols-outlined text-[16px]">north_east</span></a></div></div><div class="rounded-[24px] border border-white/60 bg-gradient-to-br from-[#FFFFFF] to-[#FCEFC4] p-7 lg:p-8 shadow-[0_12px_32px_rgba(94,143,110,0.12)] flex flex-col justify-between reveal" style="--stagger-index: 1;"><div class="flex flex-col items-start gap-4"><div><h3 class="font-serif text-2xl lg:text-3xl text-[#2E4A3A] font-medium tracking-tight">UK Road Safety Data &amp; PCA</h3><p class="font-label-mono text-xs uppercase tracking-wider text-[#705A4A] font-medium mt-1">DATA ANALYSIS</p></div><p class="text-sm lg:text-[15px] text-[#414942] leading-relaxed">Built an end-to-end preprocessing pipeline for the UK Department for Transport road safety dataset, covering ~413K records. Performed data profiling, cleaning, and integration, selecting 12 analytical features and applying PCA to reduce them to 8 principal components while retaining 94.51% of the total variance.</p><div class="w-full flex flex-col gap-3 mt-2"><div class="w-full rounded-2xl overflow-hidden bg-white border border-white/80 p-2 shadow-sm"><img alt="PCA Charts" class="w-full aspect-[16/10] object-cover rounded-xl" src="images/project-uk-road-safety.png"></div><div class="flex flex-wrap items-center gap-2"><div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-white/80 shadow-xs"><span class="font-label-mono text-xs font-semibold text-[#1a3627]">94.51% explained variance</span></div><div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-white/80 shadow-xs"><span class="material-symbols-outlined text-[15px] text-[#717971]">database</span><span class="font-label-mono text-xs font-semibold text-[#1a3627]">~413K records cleaned</span></div></div></div></div><div class="pt-6"><a aria-label="View repository for UK Road Safety Data &amp; PCA on GitHub (opens in a new tab)" class="inline-flex items-center gap-1.5 font-semibold text-sm text-[#2E4A3A] hover:text-[#366648] transition-colors" href="https://github.com/Elfaa-github/UK-Road-Safety-Data-Preprocessing-PCA" rel="noreferrer noopener" target="_blank"><span class="">View repository</span><span aria-hidden="true" class="material-symbols-outlined text-[16px]">north_east</span></a></div></div></div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8"><div id="project-eventhub" class="scroll-mt-28 rounded-[24px] border border-white/60 bg-gradient-to-br from-[#FFFFFF] to-[#D4ECEA] p-7 lg:p-8 shadow-[0_12px_32px_rgba(94,143,110,0.12)] flex flex-col justify-between reveal" style="--stagger-index: 0;"><div class="flex flex-col items-start gap-3"><div><h3 class="font-serif text-2xl lg:text-3xl text-[#2E4A3A] font-medium tracking-tight">EventHub</h3><p class="font-label-mono text-xs uppercase tracking-wider text-[#705A4A] font-medium mt-1">AI-POWERED SPONSORSHIP PLATFORM</p></div><p class="text-sm lg:text-[15px] text-[#414942] leading-relaxed">Contributed to the design and frontend development of EventHub, an AI-powered platform connecting event organizers with potential sponsors. Designed user flows, wireframes, and interactive prototypes in Figma, and contributed to frontend implementation using Next.js, React, TypeScript, and Tailwind CSS.</p><div class="w-full rounded-2xl overflow-hidden bg-white border border-white/80 shadow-sm mt-2"><button type="button" aria-label="View EventHub UI design screens" class="gallery-open group block w-full cursor-zoom-in" data-gallery="eventhub-ui"><img alt="EventHub Dashboard Preview" class="w-full aspect-[16/10] object-cover object-top group-hover:scale-[1.03] transition-transform duration-500" src="images/project-eventhub.png"></button></div></div><div class="pt-6"><button type="button" aria-label="View EventHub UI design screens" class="gallery-open inline-flex items-center gap-1.5 font-semibold text-sm text-[#2E4A3A] hover:text-[#366648] transition-colors" data-gallery="eventhub-ui"><span>View design</span><span aria-hidden="true" class="material-symbols-outlined text-[16px]">north_east</span></button></div></div><div id="project-uk-road-safety" class="scroll-mt-28 rounded-[24px] border border-white/60 bg-gradient-to-br from-[#FFFFFF] to-[#FCEFC4] p-7 lg:p-8 shadow-[0_12px_32px_rgba(94,143,110,0.12)] flex flex-col justify-between reveal" style="--stagger-index: 1;"><div class="flex flex-col items-start gap-4"><div><h3 class="font-serif text-2xl lg:text-3xl text-[#2E4A3A] font-medium tracking-tight">UK Road Safety Data &amp; PCA</h3><p class="font-label-mono text-xs uppercase tracking-wider text-[#705A4A] font-medium mt-1">DATA ANALYSIS</p></div><p class="text-sm lg:text-[15px] text-[#414942] leading-relaxed">Built an end-to-end preprocessing pipeline for the UK Department for Transport road safety dataset, covering ~413K records. Performed data profiling, cleaning, and integration, selecting 12 analytical features and applying PCA to reduce them to 8 principal components while retaining 94.51% of the total variance.</p><div class="w-full flex flex-col gap-3 mt-2"><div class="w-full rounded-2xl overflow-hidden bg-white border border-white/80 p-2 shadow-sm"><a aria-label="View repository for UK Road Safety Data &amp; PCA on GitHub (opens in a new tab)" class="group block overflow-hidden rounded-xl" href="https://github.com/Elfaa-github/UK-Road-Safety-Data-Preprocessing-PCA" rel="noreferrer noopener" target="_blank"><img alt="PCA Charts" class="w-full aspect-[16/10] object-cover group-hover:scale-[1.03] transition-transform duration-500" src="images/project-uk-road-safety.png"></a></div><div class="flex flex-wrap items-center gap-2"><div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-white/80 shadow-xs"><span class="font-label-mono text-xs font-semibold text-[#1a3627]">94.51% explained variance</span></div><div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-white/80 shadow-xs"><span class="material-symbols-outlined text-[15px] text-[#717971]">database</span><span class="font-label-mono text-xs font-semibold text-[#1a3627]">~413K records cleaned</span></div></div></div></div><div class="pt-6"><a aria-label="View repository for UK Road Safety Data &amp; PCA on GitHub (opens in a new tab)" class="inline-flex items-center gap-1.5 font-semibold text-sm text-[#2E4A3A] hover:text-[#366648] transition-colors" href="https://github.com/Elfaa-github/UK-Road-Safety-Data-Preprocessing-PCA" rel="noreferrer noopener" target="_blank"><span class="">View repository</span><span aria-hidden="true" class="material-symbols-outlined text-[16px]">north_east</span></a></div></div></div>
 <!-- Wide Card: Thriftpedia (reveal) -->
-<div class="w-full rounded-[24px] border border-white/60 bg-gradient-to-br from-[#FFFFFF] to-[#FADCC8] p-7 sm:p-9 lg:p-11 shadow-[0_12px_32px_rgba(94,143,110,0.12)] reveal" style="--stagger-index: 2;"><div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center"><div class="order-2 lg:order-1 lg:col-span-6 w-full rounded-2xl bg-[#1D2E24] text-[#D3E8DA] shadow-md overflow-hidden border border-[#2e4738]"><div class="flex items-center justify-between px-4 py-3 bg-[#15231B] border-b border-[#2e4738]"><div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-[#FF5F56]"></span><span class="w-3 h-3 rounded-full bg-[#FFBD2E]"></span><span class="w-3 h-3 rounded-full bg-[#27C93F]"></span><span class="ml-2 font-label-mono text-xs text-[#CCE2D4]/70">order.controller.js • Express • MongoDB</span></div></div><div class="p-4 sm:p-5 overflow-x-auto"><pre class="font-mono text-[12px] sm:text-xs leading-relaxed text-[#CCE2D4]"><code><span class="text-[#84B995]">const</span> session = <span class="text-[#84B995]">await</span> mongoose.startSession();
-session.startTransaction();
-<span class="text-[#84B995]">try</span> {
-  <span class="text-[#84B995]">const</span> item = <span class="text-[#84B995]">await</span> Item.findOneAndUpdate(
-    { <span class="text-[#E7A578]">_id</span>: itemId, <span class="text-[#E7A578]">status</span>: <span class="text-[#F8DAC6]">'available'</span> },
-    { <span class="text-[#E7A578]">$set</span>: { <span class="text-[#E7A578]">status</span>: <span class="text-[#F8DAC6]">'reserved'</span> } },
-    { <span class="text-[#E7A578]">session</span>, <span class="text-[#E7A578]">new</span>: <span class="text-[#84B995]">true</span> }
-  );
-  <span class="text-[#84B995]">if</span> (!item) <span class="text-[#84B995]">throw new</span> Error(<span class="text-[#F8DAC6]">'Item already sold'</span>);
-  <span class="text-[#84B995]">await</span> Order.create([{ userId, itemId }], { session });
-  <span class="text-[#84B995]">await</span> session.commitTransaction();
-} <span class="text-[#84B995]">catch</span> (err) {
-  <span class="text-[#84B995]">await</span> session.abortTransaction();
-}</code></pre></div></div><div class="order-1 lg:order-2 lg:col-span-6 flex flex-col items-start gap-4"><div><h3 class="font-serif text-3xl sm:text-4xl text-[#2E4A3A] font-medium tracking-tight">Thriftpedia</h3><p class="font-label-mono text-xs uppercase tracking-wider text-[#705A4A] font-medium mt-1">E-COMMERCE REST API WITH CONCURRENCY-SAFE PURCHASING</p></div><p class="text-sm sm:text-base text-[#414942] leading-relaxed">Developed a RESTful backend for a thrift e-commerce platform using Node.js, Express, and MongoDB. Solved race conditions during flash checkouts with atomic transactions and pessimistic locking semantics, guaranteeing zero overselling on unique single-inventory secondhand items.</p><div class="flex flex-wrap items-center gap-2 pt-1"><span class="font-label-mono text-xs px-3 py-1 rounded-full bg-white border border-white/80 text-[#1a3627] font-medium shadow-xs">Atomic Transactions</span><span class="font-label-mono text-xs px-3 py-1 rounded-full bg-white border border-white/80 text-[#1a3627] font-medium shadow-xs">JWT Auth &amp; RBAC</span><span class="font-label-mono text-xs px-3 py-1 rounded-full bg-white border border-white/80 text-[#1a3627] font-medium shadow-xs">Postman Test Suite</span></div><div class="pt-3"><a aria-label="View repository for Thriftpedia on GitHub (opens in a new tab)" class="inline-flex items-center gap-1.5 font-semibold text-sm text-[#2E4A3A] hover:text-[#366648] transition-colors" href="https://github.com/AkioAfif/Thriftpedia" rel="noreferrer noopener" target="_blank"><span class="">View repository</span><span aria-hidden="true" class="material-symbols-outlined text-[16px]">north_east</span></a></div></div></div></div>
+<div class="w-full rounded-[24px] border border-white/60 bg-gradient-to-br from-[#FFFFFF] to-[#FADCC8] p-7 sm:p-9 lg:p-11 shadow-[0_12px_32px_rgba(94,143,110,0.12)] reveal" style="--stagger-index: 2;"><div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center"><div class="order-2 lg:order-1 lg:col-span-6 w-full"><a aria-label="View Thriftpedia website (opens in a new tab)" class="group block rounded-2xl overflow-hidden border border-white/60 shadow-md bg-white aspect-[2/1]" href="https://thriftpedia.vercel.app/" rel="noopener noreferrer" target="_blank"><img alt="Thriftpedia homepage: 'One piece. One owner.' hero with thrift item cards" class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500" height="686" loading="lazy" src="images/thriftpedia-cover.webp" width="1372"></a></div><div class="order-1 lg:order-2 lg:col-span-6 flex flex-col items-start gap-4"><div><h3 class="font-serif text-3xl sm:text-4xl text-[#2E4A3A] font-medium tracking-tight">Thriftpedia</h3><p class="font-label-mono text-xs uppercase tracking-wider text-[#705A4A] font-medium mt-1">E-COMMERCE REST API WITH CONCURRENCY-SAFE PURCHASING</p></div><p class="text-sm sm:text-base text-[#414942] leading-relaxed">Developed a RESTful backend for a thrift e-commerce platform using Node.js, Express, and MongoDB. Solved race conditions during flash checkouts with atomic transactions and pessimistic locking semantics, guaranteeing zero overselling on unique single-inventory secondhand items.</p><div class="flex flex-wrap items-center gap-2 pt-1"><span class="font-label-mono text-xs px-3 py-1 rounded-full bg-white border border-white/80 text-[#1a3627] font-medium shadow-xs">Atomic Transactions</span><span class="font-label-mono text-xs px-3 py-1 rounded-full bg-white border border-white/80 text-[#1a3627] font-medium shadow-xs">JWT Auth &amp; RBAC</span><span class="font-label-mono text-xs px-3 py-1 rounded-full bg-white border border-white/80 text-[#1a3627] font-medium shadow-xs">Postman Test Suite</span></div><div class="pt-3"><a aria-label="View website for Thriftpedia (opens in a new tab)" class="inline-flex items-center gap-1.5 font-semibold text-sm text-[#2E4A3A] hover:text-[#366648] transition-colors" href="https://thriftpedia.vercel.app/" rel="noreferrer noopener" target="_blank"><span class="">View website</span><span aria-hidden="true" class="material-symbols-outlined text-[16px]">north_east</span></a></div></div></div></div>
 </section>
 <!-- TECH STACK SECTION -->
 <section class="relative w-full overflow-hidden bg-gradient-to-b from-[#EBF6F2] via-[#F4FAF5] to-[#FBF8F1]" id="tech-stack">
@@ -330,7 +404,12 @@ session.startTransaction();
 <p class="text-base text-[#414942] leading-relaxed">A curated toolkit spanning applied machine learning research, human-centered product design, and resilient web engineering.</p>
 </div>
 <!-- Tech Stack 7 Cards with Stagger (reveal) -->
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 items-stretch gap-6"><div class="rounded-3xl border border-white/60 bg-gradient-to-br from-white/90 to-[#CDEBDD]/50 p-6 shadow-sm flex flex-col justify-between reveal" style="--stagger-index: 0;"><div><div class="w-11 h-11 rounded-full bg-white shadow-xs flex items-center justify-center text-[#5E8F6E] mb-4"><span class="material-symbols-outlined text-[22px]">devices</span></div><h3 class="font-serif text-xl text-[#2E4A3A] font-semibold tracking-tight">Front End</h3><p class="text-xs text-[#414942] mt-1 mb-5">Modern, accessible &amp; reactive client interfaces</p><div class="flex flex-wrap gap-2"><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">React</span><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">Next.js</span><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">TypeScript</span></div></div></div><div class="rounded-3xl border border-white/60 bg-gradient-to-br from-white/90 to-[#D4ECEA]/50 p-6 shadow-sm flex flex-col justify-between reveal" style="--stagger-index: 1;"><div><div class="w-11 h-11 rounded-full bg-white shadow-xs flex items-center justify-center text-[#366648] mb-4"><span class="material-symbols-outlined text-[22px]">dns</span></div><h3 class="font-serif text-xl text-[#2E4A3A] font-semibold tracking-tight">Back End</h3><p class="text-xs text-[#414942] mt-1 mb-5">Scalable servers, APIs &amp; transactional logic</p><div class="flex flex-wrap gap-2"><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">Node.js</span><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">Express.js</span></div></div></div><div class="sm:col-span-2 lg:col-span-2 rounded-3xl border border-white/60 bg-gradient-to-br from-white/90 to-[#DCE9DB]/60 p-6 shadow-sm flex flex-col justify-between reveal" style="--stagger-index: 2;"><div><div class="w-11 h-11 rounded-full bg-white shadow-xs flex items-center justify-center text-[#5E8F6E] mb-4"><span class="material-symbols-outlined text-[22px]">neurology</span></div><h3 class="font-serif text-xl text-[#2E4A3A] font-semibold tracking-tight">Machine Learning &amp; DL</h3><p class="text-xs text-[#414942] mt-1 mb-5">Deep segmentation, spatial vision architectures &amp; tabular learning</p><div class="flex flex-wrap gap-2"><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">Python</span><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">PyTorch</span><span class="px-3 py-1.5 rounded-full bg-[#CDEBDD]/70 border border-white/80 shadow-xs font-label-mono text-xs text-[#1a3627] font-semibold">SegFormer</span><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">U-Net</span><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">DeepLabV3+</span></div></div></div><div class="rounded-3xl border border-white/60 bg-gradient-to-br from-white/90 to-[#FADCC8]/50 p-6 shadow-sm flex flex-col justify-between reveal" style="--stagger-index: 3;"><div><div class="w-11 h-11 rounded-full bg-white shadow-xs flex items-center justify-center text-[#705A4A] mb-4"><span class="material-symbols-outlined text-[22px]">draw</span></div><h3 class="font-serif text-xl text-[#2E4A3A] font-semibold tracking-tight">UI/UX</h3><p class="text-xs text-[#414942] mt-1 mb-5">Design systems, wireframing &amp; tactile prototypes</p><div class="flex flex-wrap gap-2"><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">Figma</span><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">FigJam</span></div></div></div><div class="rounded-3xl border border-white/60 bg-gradient-to-br from-white/90 to-[#FCEFC4]/50 p-6 shadow-sm flex flex-col justify-between reveal" style="--stagger-index: 4;"><div><div class="w-11 h-11 rounded-full bg-white shadow-xs flex items-center justify-center text-[#705A4A] mb-4"><span class="material-symbols-outlined text-[22px]">database</span></div><h3 class="font-serif text-xl text-[#2E4A3A] font-semibold tracking-tight">Database</h3><p class="text-xs text-[#414942] mt-1 mb-5">Document &amp; relational data modeling</p><div class="flex flex-wrap gap-2"><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">MongoDB</span><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">PostgreSQL</span></div></div></div><div class="rounded-3xl border border-white/60 bg-gradient-to-br from-white/90 to-[#D4ECEA]/50 p-6 shadow-sm flex flex-col justify-between reveal" style="--stagger-index: 5;"><div><div class="w-11 h-11 rounded-full bg-white shadow-xs flex items-center justify-center text-[#5E8F6E] mb-4"><span class="material-symbols-outlined text-[22px]">auto_awesome</span></div><h3 class="font-serif text-xl text-[#2E4A3A] font-semibold tracking-tight">Generative AI &amp; RAG</h3><p class="text-xs text-[#414942] mt-1 mb-5">Semantic search, embeddings &amp; LLM orchestration</p><div class="flex flex-wrap gap-2"><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">Gemini API</span><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">RAG</span><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">FAISS</span></div></div></div><div class="rounded-3xl border border-white/60 bg-gradient-to-br from-white/90 to-[#CDEBDD]/50 p-6 shadow-sm flex flex-col justify-between reveal" style="--stagger-index: 6;"><div><div class="w-11 h-11 rounded-full bg-white shadow-xs flex items-center justify-center text-[#366648] mb-4"><span class="material-symbols-outlined text-[22px]">terminal</span></div><h3 class="font-serif text-xl text-[#2E4A3A] font-semibold tracking-tight">Development Tools</h3><p class="text-xs text-[#414942] mt-1 mb-5">Version control, workflows &amp; fast interactive prototyping</p><div class="flex flex-wrap gap-2"><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">Git</span><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">GitHub</span><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">Streamlit</span></div></div></div></div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 items-stretch gap-6 scroll-mt-28" id="tech-grid"><div class="rounded-3xl border border-white/60 bg-gradient-to-br from-white/90 to-[#CDEBDD]/50 p-6 shadow-sm flex flex-col justify-between reveal" style="--stagger-index: 0;"><div><div class="w-11 h-11 rounded-full bg-white shadow-xs flex items-center justify-center text-[#5E8F6E] mb-4"><span class="material-symbols-outlined text-[22px]">devices</span></div><h3 class="font-serif text-xl text-[#2E4A3A] font-semibold tracking-tight">Front End</h3><p class="text-xs text-[#414942] mt-1 mb-5">Modern, accessible &amp; reactive client interfaces</p><div class="flex flex-wrap gap-2"><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">React</span><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">Next.js</span><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">TypeScript</span></div></div></div><div class="rounded-3xl border border-white/60 bg-gradient-to-br from-white/90 to-[#D4ECEA]/50 p-6 shadow-sm flex flex-col justify-between reveal" style="--stagger-index: 1;"><div><div class="w-11 h-11 rounded-full bg-white shadow-xs flex items-center justify-center text-[#366648] mb-4"><span class="material-symbols-outlined text-[22px]">dns</span></div><h3 class="font-serif text-xl text-[#2E4A3A] font-semibold tracking-tight">Back End</h3><p class="text-xs text-[#414942] mt-1 mb-5">Scalable servers, APIs &amp; transactional logic</p><div class="flex flex-wrap gap-2"><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">Node.js</span><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">Express.js</span></div></div></div><div class="sm:col-span-2 lg:col-span-2 rounded-3xl border border-white/60 bg-gradient-to-br from-white/90 to-[#DCE9DB]/60 p-6 shadow-sm flex flex-col justify-between reveal" style="--stagger-index: 2;"><div><div class="w-11 h-11 rounded-full bg-white shadow-xs flex items-center justify-center text-[#5E8F6E] mb-4"><span class="material-symbols-outlined text-[22px]">neurology</span></div><h3 class="font-serif text-xl text-[#2E4A3A] font-semibold tracking-tight">Machine Learning &amp; DL</h3><p class="text-xs text-[#414942] mt-1 mb-5">Deep segmentation, spatial vision architectures &amp; tabular learning</p><div class="flex flex-wrap gap-2"><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">Python</span><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">PyTorch</span><span class="px-3 py-1.5 rounded-full bg-[#CDEBDD]/70 border border-white/80 shadow-xs font-label-mono text-xs text-[#1a3627] font-semibold">SegFormer</span><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">U-Net</span><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">DeepLabV3+</span></div></div></div><div class="rounded-3xl border border-white/60 bg-gradient-to-br from-white/90 to-[#FADCC8]/50 p-6 shadow-sm flex flex-col justify-between reveal tech-extra" style="--stagger-index: 3;"><div><div class="w-11 h-11 rounded-full bg-white shadow-xs flex items-center justify-center text-[#705A4A] mb-4"><span class="material-symbols-outlined text-[22px]">draw</span></div><h3 class="font-serif text-xl text-[#2E4A3A] font-semibold tracking-tight">UI/UX</h3><p class="text-xs text-[#414942] mt-1 mb-5">Design systems, wireframing &amp; tactile prototypes</p><div class="flex flex-wrap gap-2"><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">Figma</span><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">FigJam</span></div></div></div><div class="rounded-3xl border border-white/60 bg-gradient-to-br from-white/90 to-[#FCEFC4]/50 p-6 shadow-sm flex flex-col justify-between reveal tech-extra" style="--stagger-index: 4;"><div><div class="w-11 h-11 rounded-full bg-white shadow-xs flex items-center justify-center text-[#705A4A] mb-4"><span class="material-symbols-outlined text-[22px]">database</span></div><h3 class="font-serif text-xl text-[#2E4A3A] font-semibold tracking-tight">Database</h3><p class="text-xs text-[#414942] mt-1 mb-5">Document &amp; relational data modeling</p><div class="flex flex-wrap gap-2"><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">MongoDB</span><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">PostgreSQL</span></div></div></div><div class="rounded-3xl border border-white/60 bg-gradient-to-br from-white/90 to-[#D4ECEA]/50 p-6 shadow-sm flex flex-col justify-between reveal tech-extra" style="--stagger-index: 5;"><div><div class="w-11 h-11 rounded-full bg-white shadow-xs flex items-center justify-center text-[#5E8F6E] mb-4"><span class="material-symbols-outlined text-[22px]">auto_awesome</span></div><h3 class="font-serif text-xl text-[#2E4A3A] font-semibold tracking-tight">Generative AI &amp; RAG</h3><p class="text-xs text-[#414942] mt-1 mb-5">Semantic search, embeddings &amp; LLM orchestration</p><div class="flex flex-wrap gap-2"><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">Gemini API</span><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">RAG</span><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">FAISS</span></div></div></div><div class="rounded-3xl border border-white/60 bg-gradient-to-br from-white/90 to-[#CDEBDD]/50 p-6 shadow-sm flex flex-col justify-between reveal tech-extra" style="--stagger-index: 6;"><div><div class="w-11 h-11 rounded-full bg-white shadow-xs flex items-center justify-center text-[#366648] mb-4"><span class="material-symbols-outlined text-[22px]">terminal</span></div><h3 class="font-serif text-xl text-[#2E4A3A] font-semibold tracking-tight">Development Tools</h3><p class="text-xs text-[#414942] mt-1 mb-5">Version control, workflows &amp; fast interactive prototyping</p><div class="flex flex-wrap gap-2"><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">Git</span><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">GitHub</span><span class="px-3 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs text-[#2E4A3A] font-medium">Streamlit</span></div></div></div></div>
+<div class="mt-8 flex justify-center sm:hidden">
+<button type="button" id="tech-toggle" aria-controls="tech-grid" aria-expanded="false" class="inline-flex items-center gap-1.5 h-11 px-6 rounded-full border-[1.5px] border-[#5E8F6E] text-[#2E4A3A] font-semibold text-sm bg-white/70 hover:bg-[#CDEBDD]/50 transition-colors">
+<span data-label>See all (7)</span><span aria-hidden="true" class="material-symbols-outlined text-[18px] transition-transform duration-300">expand_more</span>
+</button>
+</div>
 </div>
 <div class="w-full overflow-hidden leading-none z-10">
 <svg class="block w-full h-12 lg:h-20 text-[#FBF8F1]" preserveAspectRatio="none" viewBox="0 0 1200 120"><path d="M0,0 C300,90 600,10 900,60 C1050,85 1150,30 1200,0 L1200,120 L0,120 Z" fill="currentColor"></path></svg>
@@ -535,4 +614,241 @@ session.startTransaction();
   }, { passive: true });
 })();
 </script>
-</body></html>
+<!-- ============ DESIGN GALLERY (bento overlay) ============ -->
+<dialog class="gallery-dialog" id="design-gallery" aria-labelledby="gallery-title">
+  <div class="gallery-shell">
+    <header class="gallery-head">
+      <div class="gallery-head-inner">
+        <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+          <button type="button" class="gallery-icon-btn" id="gallery-back" aria-label="Back to page"><span class="material-symbols-outlined" aria-hidden="true">arrow_back</span></button>
+          <div class="gallery-titles min-w-0">
+            <p class="font-label-mono text-sm font-semibold text-[#366648]" id="gallery-org"></p>
+            <h2 class="font-serif text-2xl sm:text-4xl text-[#1a3627] font-medium tracking-tight" id="gallery-title"></h2>
+          </div>
+        </div>
+        <button type="button" class="gallery-btn shrink-0" id="gallery-close" aria-label="Close"><span>Close</span><span class="material-symbols-outlined" aria-hidden="true">close</span></button>
+      </div>
+    </header>
+    <div class="gallery-body">
+      <p class="gallery-sub" id="gallery-sub"></p>
+      <div class="bento" id="gallery-grid"></div>
+      <section class="viewer" id="gallery-viewer" aria-live="polite" hidden>
+        <div class="viewer-stage">
+          <button type="button" class="viewer-nav" id="viewer-prev" aria-label="Previous design"><span class="material-symbols-outlined" aria-hidden="true">chevron_left</span></button>
+          <figure class="viewer-figure">
+            <img class="viewer-img" id="viewer-img" alt="">
+            <figcaption class="viewer-cap"><strong id="viewer-title"></strong><span id="viewer-meta"></span><span class="viewer-count font-label-mono" id="viewer-count"></span></figcaption>
+          </figure>
+          <button type="button" class="viewer-nav" id="viewer-next" aria-label="Next design"><span class="material-symbols-outlined" aria-hidden="true">chevron_right</span></button>
+        </div>
+      </section>
+    </div>
+  </div>
+</dialog>
+<script>
+// Design gallery: overlay bento + viewer. Semua konten ada di GALLERIES (satu sumber data).
+(function () {
+  var GALLERIES = {
+  "eventhub-ui": {
+    "title": "UI/UX Designer",
+    "org": "Google Developer Groups on Campus UGM",
+    "items": [
+      {
+        "id": "landing",
+        "src": "images/gallery/eventhub/landing-page.webp",
+        "w": 1200,
+        "h": 2832,
+        "title": "EventHub · Landing Page",
+        "meta": "Temukan Sponsorship yang Tepat Sasaran",
+        "alt": "EventHub landing page design, from the hero section to the footer"
+      },
+      {
+        "id": "dashboard",
+        "src": "images/gallery/eventhub/eo-dashboard.webp",
+        "w": 1444,
+        "h": 989,
+        "title": "Event Organizer Dashboard",
+        "meta": "Managed events, sponsorship pipeline, and latest proposals",
+        "alt": "EventHub event organizer dashboard design"
+      },
+      {
+        "id": "create-event",
+        "src": "images/gallery/eventhub/buat-event-step-1.webp",
+        "w": 1444,
+        "h": 1438,
+        "title": "Create Event · Step 1",
+        "meta": "Basic info, step 1 of 3",
+        "alt": "EventHub Create Event form, step 1 of 3: basic information"
+      }
+    ],
+    "rows": [
+      {
+        "split": [
+          "landing",
+          [
+            "dashboard",
+            "create-event"
+          ]
+        ],
+        "weights": [
+          440,
+          584
+        ]
+      }
+    ]
+  }
+};
+
+  var dlg = document.getElementById('design-gallery');
+  if (!dlg || typeof dlg.showModal !== 'function') return;
+  var $ = function (id) { return document.getElementById(id); };
+  var el = { org: $('gallery-org'), title: $('gallery-title'), sub: $('gallery-sub'), grid: $('gallery-grid'),
+    viewer: $('gallery-viewer'), img: $('viewer-img'), vtitle: $('viewer-title'), vmeta: $('viewer-meta'),
+    vcount: $('viewer-count'), back: $('gallery-back'), close: $('gallery-close'), prev: $('viewer-prev'), next: $('viewer-next'),
+    shell: dlg.querySelector('.gallery-shell') };
+  var state = { gallery: null, order: [], index: 0, opener: null };
+
+  // jumlah desain di tombol/chip diambil dari data
+  document.querySelectorAll('[data-gallery-count]').forEach(function (n) {
+    var g = GALLERIES[n.getAttribute('data-gallery-count')];
+    if (g) n.textContent = String(g.items.length);
+  });
+
+  function byId(g) { var m = {}; g.items.forEach(function (i) { m[i.id] = i; }); return m; }
+
+  function makeTile(it) {
+    var ratio = it.w / it.h;
+    var tile = document.createElement('figure');
+    tile.className = 'bento-tile' + (ratio > 2 ? ' is-wide' : '');
+    tile.style.setProperty('--r', ratio.toFixed(4));
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'bento-frame';
+    btn.setAttribute('data-id', it.id);
+    btn.setAttribute('aria-label', 'View larger: ' + it.title);
+    var img = document.createElement('img');
+    img.src = it.src; img.alt = it.alt; img.width = it.w; img.height = it.h;
+    img.loading = 'lazy'; img.decoding = 'async';
+    btn.appendChild(img);
+    var cap = document.createElement('figcaption');
+    cap.className = 'bento-cap';
+    var t = document.createElement('strong'); t.textContent = it.title; cap.appendChild(t);
+    if (it.meta) { var m = document.createElement('span'); m.textContent = it.meta; cap.appendChild(m); }
+    tile.appendChild(btn); tile.appendChild(cap);
+    state.order.push(it);
+    return tile;
+  }
+
+  // rows: ["id", ...] = satu baris rata tinggi; {split:[kiri,[atas,bawah]], weights:[a,b]} = kolom kiri tinggi + kolom kanan bertumpuk
+  function buildGrid(g) {
+    var map = byId(g);
+    el.grid.textContent = '';
+    state.order = [];
+    g.rows.forEach(function (row) {
+      var rowEl = document.createElement('div');
+      if (Array.isArray(row)) {
+        rowEl.className = 'bento-row';
+        row.forEach(function (id) { rowEl.appendChild(makeTile(map[id])); });
+      } else {
+        rowEl.className = 'bento-split';
+        row.split.forEach(function (col, i) {
+          var colEl = document.createElement('div');
+          colEl.className = 'bento-col';
+          colEl.style.setProperty('--w', row.weights[i]);
+          (Array.isArray(col) ? col : [col]).forEach(function (id) { colEl.appendChild(makeTile(map[id])); });
+          rowEl.appendChild(colEl);
+        });
+      }
+      el.grid.appendChild(rowEl);
+    });
+  }
+
+  function syncBack() {
+    el.back.setAttribute('aria-label', el.viewer.hidden ? 'Back to page' : 'Back to all designs');
+  }
+
+  function showGrid(focusId) {
+    el.viewer.hidden = true; el.grid.hidden = false; el.sub.hidden = false;
+    var btn = focusId && el.grid.querySelector('[data-id="' + focusId + '"]');
+    if (btn) btn.focus(); else el.close.focus();
+   syncBack();
+  }
+
+  function showViewer(i) {
+    var it = state.order[i]; if (!it) return;
+    state.index = i;
+    el.grid.hidden = true; el.sub.hidden = true; el.viewer.hidden = false;
+    el.img.src = it.src; el.img.alt = it.alt; el.img.width = it.w; el.img.height = it.h;
+    el.vtitle.textContent = it.title; el.vmeta.textContent = it.meta || ''; el.vmeta.hidden = !it.meta;
+    el.vcount.textContent = (i + 1) + ' / ' + state.order.length;
+    el.prev.disabled = i === 0; el.next.disabled = i === state.order.length - 1;
+    el.shell.scrollTop = 0;
+    [i - 1, i + 1].forEach(function (j) { if (state.order[j]) { new Image().src = state.order[j].src; } });
+   syncBack();
+  }
+
+  function open(key, focusId, opener) {
+    var g = GALLERIES[key]; if (!g) return;
+    state.gallery = g; state.opener = opener || null;
+    el.org.textContent = g.org; el.title.textContent = g.title;
+    el.sub.textContent = 'Design works · ' + g.items.length + ' · Select a design to view it larger';
+    buildGrid(g);
+    el.viewer.hidden = true; el.grid.hidden = false; el.sub.hidden = false;
+    document.documentElement.classList.add('gallery-lock');
+    dlg.showModal();
+    el.shell.scrollTop = 0;
+    var target = focusId && el.grid.querySelector('[data-id="' + focusId + '"]');
+    if (target) target.focus({ preventScroll: true }); else el.close.focus();
+   syncBack();
+  }
+
+  document.addEventListener('click', function (e) {
+    var trigger = e.target.closest && e.target.closest('.gallery-open');
+    if (!trigger) return;
+    open(trigger.getAttribute('data-gallery'), trigger.getAttribute('data-focus'), trigger);
+  });
+  el.grid.addEventListener('click', function (e) {
+    var btn = e.target.closest('.bento-frame'); if (!btn) return;
+    var id = btn.getAttribute('data-id');
+    showViewer(state.order.findIndex(function (it) { return it.id === id; }));
+  });
+  el.back.addEventListener('click', function () { if (el.viewer.hidden) { dlg.close(); } else { showGrid(state.order[state.index] && state.order[state.index].id); } });
+  el.close.addEventListener('click', function () { dlg.close(); });
+  el.prev.addEventListener('click', function () { showViewer(state.index - 1); });
+  el.next.addEventListener('click', function () { showViewer(state.index + 1); });
+
+  // Esc: dari viewer kembali ke bento dulu; Esc berikutnya menutup overlay
+  dlg.addEventListener('cancel', function (e) {
+    if (!el.viewer.hidden) { e.preventDefault(); showGrid(state.order[state.index] && state.order[state.index].id); }
+  });
+  dlg.addEventListener('keydown', function (e) {
+    if (el.viewer.hidden) return;
+    if (e.key === 'ArrowLeft' && state.index > 0) { e.preventDefault(); showViewer(state.index - 1); }
+    if (e.key === 'ArrowRight' && state.index < state.order.length - 1) { e.preventDefault(); showViewer(state.index + 1); }
+  });
+  dlg.addEventListener('close', function () {
+    document.documentElement.classList.remove('gallery-lock');
+    if (state.opener && document.contains(state.opener)) state.opener.focus();
+  });
+})();
+</script>
+<script>
+(function(){
+  var grid=document.getElementById('tech-grid'), btn=document.getElementById('tech-toggle');
+  if(!grid||!btn){return;}
+  var label=btn.querySelector('[data-label]'), icon=btn.querySelector('.material-symbols-outlined');
+  var extras=grid.querySelectorAll('.tech-extra'), total=grid.children.length;
+  function set(open){
+    grid.classList.toggle('is-expanded',open);
+    btn.setAttribute('aria-expanded',String(open));
+    label.textContent=open?'Show less':'See all ('+total+')';
+    icon.style.transform=open?'rotate(180deg)':'';
+    if(open){Array.prototype.forEach.call(extras,function(el){el.classList.add('is-visible');});}
+  }
+  btn.addEventListener('click',function(){
+    var open=!grid.classList.contains('is-expanded');
+    set(open);
+    if(!open){grid.scrollIntoView({block:'start'});}
+  });
+})();
+</script></body></html>

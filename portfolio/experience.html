@@ -78,6 +78,75 @@ a:focus-visible, button:focus-visible { outline: 2px solid #366648; outline-offs
 .pill-link:hover { box-shadow: 0 6px 16px rgba(94,143,110,.18); }
 .pill-link .arrow { display: inline-block; transition: transform .25s ease; }
 .pill-link:hover .arrow { transform: translate(2px,-2px); }
+
+/* ---------- Design gallery (bento overlay) ---------- */
+.gallery-trigger { position: relative; display: block; width: 100%; padding: 0; border: 0; background: none; text-align: left; cursor: zoom-in; border-radius: 1rem; }
+.gallery-chip { position: absolute; right: 12px; bottom: 12px; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 9999px; background: rgba(255,255,255,.92); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); box-shadow: 0 4px 14px rgba(94,143,110,.22); font-size: 12px; font-weight: 600; color: #1a3627; transition: transform .25s ease, background-color .25s ease; }
+.gallery-chip .material-symbols-outlined { font-size: 16px; }
+.gallery-trigger:hover .gallery-chip { transform: translateY(-2px); background: #fff; }
+
+html.gallery-lock, html.gallery-lock body { overflow: hidden; }
+.gallery-dialog { padding: 0; border: 0; margin: 0; width: 100vw; max-width: 100vw; height: 100vh; height: 100dvh; max-height: 100dvh; background: linear-gradient(to bottom, #FBF8F1, #F4FAF5 45%, #EAF5EE); color: #042013; overflow: hidden; }
+.gallery-dialog::backdrop { background: rgba(4,32,19,.55); }
+.gallery-dialog[open] { animation: galleryIn .45s cubic-bezier(.16,1,.3,1); }
+@keyframes galleryIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+.gallery-shell { height: 100%; overflow-y: auto; overscroll-behavior: contain; }
+.gallery-head { position: sticky; top: 0; z-index: 5; background: rgba(251,248,241,.88); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(94,143,110,.12); }
+.gallery-head-inner, .gallery-body { max-width: 1088px; margin: 0 auto; padding-left: 16px; padding-right: 16px; }
+@media (min-width: 640px) { .gallery-head-inner, .gallery-body { padding-left: 24px; padding-right: 24px; } }
+.gallery-head-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 16px; padding-bottom: 16px; }
+.gallery-body { padding-top: 28px; padding-bottom: 72px; }
+.gallery-sub { margin: 0 0 24px; font-size: 15px; color: #414942; }
+.gallery-btn { display: inline-flex; align-items: center; gap: 6px; height: 44px; padding: 0 20px; border-radius: 9999px; border: 1.5px solid #5E8F6E; background: transparent; color: #2E4A3A; font-size: 14px; font-weight: 600; cursor: pointer; transition: background-color .2s ease, box-shadow .2s ease; white-space: nowrap; }
+.gallery-btn:hover { background: rgba(205,235,221,.5); box-shadow: 0 6px 16px rgba(94,143,110,.18); }
+.gallery-btn .material-symbols-outlined { font-size: 18px; }
+.gallery-btn[hidden] { display: none; }
+.gallery-icon-btn { width: 44px; height: 44px; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 9999px; border: 1.5px solid #5E8F6E; background: transparent; color: #2E4A3A; cursor: pointer; transition: background-color .2s ease, box-shadow .2s ease; }
+.gallery-icon-btn:hover { background: rgba(205,235,221,.5); box-shadow: 0 6px 16px rgba(94,143,110,.18); }
+.gallery-icon-btn .material-symbols-outlined { font-size: 22px; }
+.gallery-titles { display: flex; flex-direction: column; gap: 6px; }
+.gallery-titles p { margin: 0; line-height: 1.3; }
+.gallery-titles h2 { margin: 0; line-height: 1.15; }
+@media (max-width: 479px) { #gallery-close { width: 44px; padding: 0; justify-content: center; } #gallery-close > span:first-child { display: none; } }
+
+/* bento: tiap baris dibagi sesuai rasio asli gambar -> tinggi sama, gambar tampil utuh tanpa terpotong */
+.bento { display: flex; flex-direction: column; gap: 28px; }
+.bento-row { display: flex; gap: 16px; align-items: flex-start; }
+.bento-tile { margin: 0; min-width: 0; flex: var(--r) 1 0%; }
+.bento-frame { display: block; width: 100%; aspect-ratio: var(--r); padding: 0; border: 1px solid rgba(255,255,255,.85); border-radius: 20px; overflow: hidden; background: #fff; box-shadow: 0 12px 32px rgba(94,143,110,.12); cursor: zoom-in; transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s ease; }
+.bento-frame img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .5s cubic-bezier(.16,1,.3,1); }
+@media (hover: hover) { .bento-frame:hover { transform: translateY(-3px); box-shadow: 0 18px 40px rgba(94,143,110,.2); } .bento-frame:hover img { transform: scale(1.03); } }
+.bento-cap { margin-top: 10px; }
+.bento-cap strong { display: block; font-size: 14px; font-weight: 600; color: #042013; line-height: 1.35; }
+.bento-cap span { display: block; margin-top: 2px; font-size: 13px; color: #414942; line-height: 1.35; }
+@media (max-width: 639px) {
+  .bento { display: block; column-count: 2; column-gap: 12px; }
+  .bento-row { display: contents; }
+  .bento-tile { break-inside: avoid; margin-bottom: 18px; }
+  .bento-tile.is-wide { column-span: all; }
+}
+
+/* viewer (lihat satu desain lebih besar) */
+.viewer[hidden] { display: none; }
+.viewer-stage { display: grid; grid-template-columns: 44px minmax(0,1fr) 44px; align-items: center; gap: 12px; }
+@media (max-width: 639px) { .viewer-stage { grid-template-columns: 36px minmax(0,1fr) 36px; gap: 8px; } }
+.viewer-nav { width: 44px; height: 44px; border-radius: 9999px; border: 1.5px solid #5E8F6E; background: rgba(255,255,255,.8); color: #2E4A3A; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; transition: background-color .2s ease; }
+@media (max-width: 639px) { .viewer-nav { width: 36px; height: 36px; } }
+.viewer-nav:hover { background: #CDEBDD; }
+.viewer-nav:disabled { opacity: .35; cursor: default; }
+.viewer-figure { margin: 0; display: flex; flex-direction: column; align-items: center; min-width: 0; }
+.viewer-img { display: block; max-width: 100%; max-height: calc(100vh - 270px); max-height: calc(100dvh - 270px); width: auto; height: auto; border-radius: 18px; background: #fff; box-shadow: 0 18px 48px rgba(94,143,110,.2); }
+.viewer-cap { margin-top: 16px; text-align: center; }
+.viewer-cap strong { display: block; font-size: 16px; font-weight: 600; color: #042013; }
+.viewer-cap span { display: block; margin-top: 2px; font-size: 14px; color: #414942; }
+.viewer-cap .viewer-count { margin-top: 8px; font-size: 12px; letter-spacing: .08em; color: #717971; }
+
+/* bento split: satu kolom tinggi + dua tile bertumpuk */
+.bento-split { display: flex; gap: 16px; align-items: flex-start; }
+.bento-col { flex: var(--w) 1 0%; min-width: 0; display: flex; flex-direction: column; gap: 16px; }
+.bento-col .bento-tile { flex: none; width: 100%; }
+@media (max-width: 639px) { .bento-split, .bento-col { display: contents; } }
+@media (max-width: 639px) { #exp-list:not(.is-expanded) .exp-extra { display: none; } }
 </style>
 
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -92,7 +161,25 @@ tailwind.config = { darkMode: "class", theme: { extend: { colors: {
 } } } };
 </script>
 <noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
-</head>
+<script>(function(){
+  var RESTORE_ON_INTERNAL_LINK=true; // false = only browser Back/Forward restores
+  if('scrollRestoration' in history){history.scrollRestoration='auto';}
+  var KEY='scrollY:'+location.pathname;
+  function save(){try{sessionStorage.setItem(KEY,String(Math.round(window.pageYOffset||0)));}catch(e){}}
+  window.addEventListener('pagehide',save);
+  document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden'){save();}});
+  var nav=(performance.getEntriesByType&&performance.getEntriesByType('navigation')[0])||{};
+  var fromSite=false;try{var r=new URL(document.referrer);fromSite=r.origin===location.origin&&r.pathname!==location.pathname;}catch(e){}
+  var should=nav.type==='back_forward'||(RESTORE_ON_INTERNAL_LINK&&nav.type==='navigate'&&fromSite&&!location.hash);
+  if(!should){return;}
+  var y=0;try{y=parseInt(sessionStorage.getItem(KEY)||'0',10)||0;}catch(e){}
+  if(y<=0){return;}
+  var de=document.documentElement,prev=de.style.scrollBehavior;
+  function go(){de.style.scrollBehavior='auto';window.scrollTo(0,y);de.style.scrollBehavior=prev;}
+  go();
+  window.addEventListener('DOMContentLoaded',go);
+  window.addEventListener('load',function(){go();setTimeout(go,150);setTimeout(go,500);});
+})();</script></head>
 
 <body class="bg-[#FBF8F1] text-[#042013] antialiased selection:bg-[#CDEBDD] selection:text-[#042013]">
 
@@ -180,7 +267,7 @@ tailwind.config = { darkMode: "class", theme: { extend: { colors: {
       <div class="relative w-full pl-8 sm:pl-12 lg:pl-16">
         <div aria-hidden="true" class="absolute left-3 sm:left-4 lg:left-5 top-6 bottom-6 w-[2px] -translate-x-1/2 bg-[#5E8F6E]/30 rounded-full"></div>
 
-        <div class="space-y-8 sm:space-y-10">
+        <div class="space-y-8 sm:space-y-10 scroll-mt-28" id="exp-list">
 
           <!-- 1. Basic Science Laboratory Assistant (ongoing) -->
           <article class="relative reveal" id="exp-lab-assistant" style="--stagger-index: 0;">
@@ -305,21 +392,28 @@ tailwind.config = { darkMode: "class", theme: { extend: { colors: {
                 </div>
                 <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <figure class="exp-figure">
-                    <div class="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-white border border-white/80 shadow-sm">
-                      <img alt="EventHub landing page design in Figma" class="w-full h-full object-cover object-top" loading="lazy" src="images/experience-eventhub.png">
-                    </div>
+                    <button type="button" class="gallery-trigger gallery-open" data-gallery="eventhub-ui" aria-label="Open EventHub UI screens: landing page, dashboard, and Create Event form">
+                      <span class="block w-full aspect-[4/3] rounded-2xl overflow-hidden bg-[#EAF1F8] border border-white/80 shadow-sm">
+                        <span class="grid h-full w-full gap-1.5 p-1.5" style="grid-template-columns: 1fr 1.15fr; grid-template-rows: 1fr 1fr;">
+                          <span class="row-span-2 rounded-lg overflow-hidden bg-white shadow-sm"><img alt="" class="w-full h-full object-cover object-top" loading="lazy" src="images/gallery/eventhub/landing-page.webp"></span>
+                          <span class=" rounded-lg overflow-hidden bg-white shadow-sm"><img alt="" class="w-full h-full object-cover object-top" loading="lazy" src="images/gallery/eventhub/eo-dashboard.webp"></span>
+                          <span class=" rounded-lg overflow-hidden bg-white shadow-sm"><img alt="" class="w-full h-full object-cover object-top" loading="lazy" src="images/gallery/eventhub/buat-event-step-1.webp"></span>
+                        </span>
+                      </span>
+                      <span class="gallery-chip font-label-mono" aria-hidden="true"><span class="material-symbols-outlined">grid_view</span>View all <span data-gallery-count="eventhub-ui">3</span></span>
+                    </button>
                     <figcaption class="mt-3">
-                      <span class="block text-sm font-semibold text-[#042013] leading-snug">Design System &amp; Prototype Flow</span>
-                      <span class="block text-sm text-[#414942] leading-snug mt-0.5">Figma component system and responsive screens</span>
+                      <span class="block text-sm font-semibold text-[#042013] leading-snug">EventHub UI Screens</span>
+                      <span class="block text-sm text-[#414942] leading-snug mt-0.5">Landing page, organizer dashboard, and Create Event form</span>
                     </figcaption>
                   </figure>
                   <figure class="exp-figure">
                     <div class="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-[#1D2E24] border border-white/80 shadow-sm">
-                      <img alt="Figma workspace showing the EventHub user journey and usability test artifacts" class="w-full h-full object-cover" loading="lazy" src="images/experience-figma-eventhub.png">
+                      <img alt="Figma workspace showing EventHub screens linked as a prototype flow" class="w-full h-full object-cover" loading="lazy" src="images/experience-figma-eventhub.png">
                     </div>
                     <figcaption class="mt-3">
-                      <span class="block text-sm font-semibold text-[#042013] leading-snug">User Journey &amp; Usability Test Artifacts</span>
-                      <span class="block text-sm text-[#414942] leading-snug mt-0.5">Session observations and task-completion notes</span>
+                      <span class="block text-sm font-semibold text-[#042013] leading-snug">Prototype Flow in Figma</span>
+                      <span class="block text-sm text-[#414942] leading-snug mt-0.5">Screens linked with prototype connections and their component layers</span>
                     </figcaption>
                   </figure>
                 </div>
@@ -327,8 +421,113 @@ tailwind.config = { darkMode: "class", theme: { extend: { colors: {
             </div>
           </article>
 
-          <!-- 4. Student Welfare Staff (ongoing) -->
-          <article class="relative reveal" id="exp-welfare" style="--stagger-index: 3;">
+          <!-- 4. Graphic Designer (completed) -->
+          <article class="relative reveal exp-extra" id="exp-graphic-designer" style="--stagger-index: 3;">
+            <div aria-hidden="true" class="absolute left-[-20px] sm:left-[-32px] lg:left-[-44px] top-9 w-6 h-6 -translate-x-1/2 rounded-full bg-[#FBF8F1] border-2 border-[#5E8F6E] shadow-md"></div>
+            <div class="exp-card rounded-[28px] border border-white/70 bg-gradient-to-br from-white via-[#F4FAF5] to-[#D4ECEA]/60 p-6 sm:p-8 lg:p-10 shadow-[0_12px_32px_rgba(94,143,110,0.10)]">
+              <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-6">
+                <div>
+                  <h2 class="font-serif text-2xl sm:text-3xl lg:text-4xl text-[#1a3627] font-medium tracking-tight">Graphic Designer</h2>
+                  <p class="mt-2 font-label-mono text-sm font-semibold text-[#366648]">Voluntiiran Yogyakarta</p>
+                </div>
+                <span class="inline-flex items-center self-start shrink-0 px-3.5 py-1.5 rounded-full bg-white border border-white/80 shadow-xs font-label-mono text-xs font-medium text-[#414942]">Dec 2025 – Mar 2026</span>
+              </div>
+
+              <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+                <div class="lg:col-span-5">
+                  <p class="text-base text-[#414942] leading-relaxed">Designed visual materials for volunteer activities, including lanyards, ID cards, recruitment posters, and banners, while maintaining consistent branding. Created recruitment posters to communicate important information and attract new volunteers.</p>
+                  <ul class="mt-5 space-y-2.5 text-[15px] text-[#1a3627]">
+                    <li class="flex items-start gap-3"><span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-[#5E8F6E] shrink-0"></span>Lanyards and ID cards</li>
+                    <li class="flex items-start gap-3"><span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-[#5E8F6E] shrink-0"></span>Recruitment posters</li>
+                    <li class="flex items-start gap-3"><span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-[#5E8F6E] shrink-0"></span>Banners</li>
+                    <li class="flex items-start gap-3"><span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-[#5E8F6E] shrink-0"></span>Consistent branding</li>
+                  </ul>
+                  <button type="button" class="pill-link gallery-open mt-6 inline-flex items-center gap-1.5 font-semibold text-sm text-[#2E4A3A] hover:text-[#366648] transition-colors" data-gallery="graphic-designer">
+                    <span>View all designs (<span data-gallery-count="graphic-designer">6</span>)</span><span class="arrow text-xs" aria-hidden="true">↗</span>
+                  </button>
+                </div>
+                <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <figure class="exp-figure">
+                    <button type="button" class="gallery-trigger gallery-open" data-gallery="graphic-designer" data-focus="poster-cup-kertas" aria-label="Open all Graphic Designer design works, starting from Recruitment Posters">
+                      <span class="block w-full aspect-[4/3] rounded-2xl overflow-hidden bg-white border border-white/80 shadow-sm">
+                        <img alt="Open recruitment volunteer poster for the Cup Kertas and Kawat Bulu creative project" class="w-full h-full object-cover object-top" loading="lazy" src="images/gallery/voluntiiran/poster-cup-kertas.webp">
+                      </span>
+                      <span class="gallery-chip font-label-mono" aria-hidden="true"><span class="material-symbols-outlined">grid_view</span>View all <span data-gallery-count="graphic-designer">6</span></span>
+                    </button>
+                    <figcaption class="mt-3">
+                      <span class="block text-sm font-semibold text-[#042013] leading-snug">Recruitment Posters</span>
+                      <span class="block text-sm text-[#414942] leading-snug mt-0.5">Open recruitment posters for volunteer activities</span>
+                    </figcaption>
+                  </figure>
+                  <figure class="exp-figure">
+                    <button type="button" class="gallery-trigger gallery-open" data-gallery="graphic-designer" aria-label="Open all Graphic Designer design works">
+                      <span class="block w-full aspect-[4/3] rounded-2xl overflow-hidden bg-white border border-white/80 shadow-sm">
+                        <img alt="Collage of Voluntiiran designs: recruitment posters, volunteer ID card, lanyard, and banner" class="w-full h-full object-contain" height="1131" loading="lazy" src="images/experience-voluntiiran-collage.webp" width="1600">
+                      </span>
+                      <span class="gallery-chip font-label-mono" aria-hidden="true"><span class="material-symbols-outlined">grid_view</span>View all <span data-gallery-count="graphic-designer">6</span></span>
+                    </button>
+                    <figcaption class="mt-3">
+                      <span class="block text-sm font-semibold text-[#042013] leading-snug">Design Collection</span>
+                      <span class="block text-sm text-[#414942] leading-snug mt-0.5">Recruitment posters, ID card, lanyard, and banner</span>
+                    </figcaption>
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 5. Freelance Private Tutor (ongoing) -->
+          <article class="relative reveal exp-extra" id="exp-tutor" style="--stagger-index: 4;">
+            <div aria-hidden="true" class="absolute left-[-20px] sm:left-[-32px] lg:left-[-44px] top-9 w-6 h-6 -translate-x-1/2 rounded-full bg-[#CDEBDD] border-2 border-white flex items-center justify-center shadow-md">
+              <span class="w-2.5 h-2.5 rounded-full bg-[#5E8F6E]"></span>
+            </div>
+            <div class="exp-card rounded-[28px] border border-white/70 bg-gradient-to-br from-white via-[#F4FAF5] to-[#CDEBDD]/60 p-6 sm:p-8 lg:p-10 shadow-[0_12px_32px_rgba(94,143,110,0.10)]">
+              <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-6">
+                <div>
+                  <h2 class="font-serif text-2xl sm:text-3xl lg:text-4xl text-[#1a3627] font-medium tracking-tight">Freelance Private Tutor</h2>
+                  <p class="mt-2 font-label-mono text-sm font-semibold text-[#366648]">Edufio Yogyakarta</p>
+                </div>
+                <span class="inline-flex items-center gap-2 self-start shrink-0 px-3.5 py-1.5 rounded-full bg-[#CDEBDD] border border-white/80 shadow-xs font-label-mono text-xs font-bold text-[#1a3627]">
+                  <span class="w-2 h-2 rounded-full bg-[#366648]"></span>Aug 2025 – Present
+                </span>
+              </div>
+
+              <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+  <div class="lg:col-span-5">
+    <p class="text-base text-[#414942] leading-relaxed">Provided one-on-one tutoring in Mathematics and Korean to help students improve their understanding of each subject. Developed learning materials and practice worksheets based on each student's individual learning needs.</p>
+    <ul class="mt-5 space-y-2.5 text-[15px] text-[#1a3627]">
+      <li class="flex items-start gap-3"><span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-[#5E8F6E] shrink-0"></span>One-on-one Mathematics tutoring</li>
+      <li class="flex items-start gap-3"><span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-[#5E8F6E] shrink-0"></span>One-on-one Korean tutoring</li>
+      <li class="flex items-start gap-3"><span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-[#5E8F6E] shrink-0"></span>Learning materials tailored to each student</li>
+      <li class="flex items-start gap-3"><span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-[#5E8F6E] shrink-0"></span>Practice worksheets</li>
+    </ul>
+  </div>
+  <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
+    <figure class="exp-figure">
+      <div class="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-white border border-white/80 shadow-sm">
+        <img alt="Tutoring moment with a student" class="w-full h-full object-cover" height="900" loading="lazy" src="images/experience-tutor-1.webp" width="1200">
+      </div>
+      <figcaption class="mt-3">
+        <span class="block text-sm font-semibold text-[#042013] leading-snug">One-on-One Tutoring</span>
+        <span class="block text-sm text-[#414942] leading-snug mt-0.5">Mathematics and Korean sessions with students</span>
+      </figcaption>
+    </figure>
+    <figure class="exp-figure">
+      <div class="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-white border border-white/80 shadow-sm">
+        <img alt="Tutoring moment with a student" class="w-full h-full object-cover" height="900" loading="lazy" src="images/experience-tutor-2.webp" width="1200">
+      </div>
+      <figcaption class="mt-3">
+        <span class="block text-sm font-semibold text-[#042013] leading-snug">Learning Together</span>
+        <span class="block text-sm text-[#414942] leading-snug mt-0.5">Sessions tailored to each student's needs</span>
+      </figcaption>
+    </figure>
+  </div>
+</div>
+            </div>
+          </article>
+
+          <!-- 6. Student Welfare Staff (ongoing) -->
+          <article class="relative reveal exp-extra" id="exp-welfare" style="--stagger-index: 5;">
             <div aria-hidden="true" class="absolute left-[-20px] sm:left-[-32px] lg:left-[-44px] top-9 w-6 h-6 -translate-x-1/2 rounded-full bg-[#FCEFC4] border-2 border-white flex items-center justify-center shadow-md">
               <span class="w-2.5 h-2.5 rounded-full bg-[#5E8F6E]"></span>
             </div>
@@ -352,6 +551,9 @@ tailwind.config = { darkMode: "class", theme: { extend: { colors: {
                     <li class="flex items-start gap-3"><span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-[#5E8F6E] shrink-0"></span>Poster design</li>
                     <li class="flex items-start gap-3"><span class="mt-2.5 w-1.5 h-1.5 rounded-full bg-[#5E8F6E] shrink-0"></span>Instagram feed and social media content</li>
                   </ul>
+                  <button type="button" class="pill-link gallery-open mt-6 inline-flex items-center gap-1.5 font-semibold text-sm text-[#2E4A3A] hover:text-[#366648] transition-colors" data-gallery="student-welfare">
+                    <span>View all designs (<span data-gallery-count="student-welfare">7</span>)</span><span class="arrow text-xs" aria-hidden="true">↗</span>
+                  </button>
                 </div>
                 <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <figure class="exp-figure">
@@ -364,9 +566,12 @@ tailwind.config = { darkMode: "class", theme: { extend: { colors: {
                     </figcaption>
                   </figure>
                   <figure class="exp-figure">
-                    <div class="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-white border border-white/80 shadow-sm">
-                      <img alt="Instagram feed carousels and infographics designed for welfare schedules" class="w-full h-full object-cover" loading="lazy" src="images/experience-feed-instagram-adkesma.png">
-                    </div>
+                    <button type="button" class="gallery-trigger gallery-open" data-gallery="student-welfare" data-focus="recap-cover" aria-label="Open all Student Welfare design works">
+                      <span class="block w-full aspect-[4/3] rounded-2xl overflow-hidden bg-white border border-white/80 shadow-sm">
+                        <img alt="Instagram feed carousels and infographics designed for welfare schedules" class="w-full h-full object-cover" loading="lazy" src="images/experience-feed-instagram-adkesma.png">
+                      </span>
+                      <span class="gallery-chip font-label-mono" aria-hidden="true"><span class="material-symbols-outlined">grid_view</span>View all <span data-gallery-count="student-welfare">7</span></span>
+                    </button>
                     <figcaption class="mt-3">
                       <span class="block text-sm font-semibold text-[#042013] leading-snug">Student Welfare Instagram Feeds</span>
                       <span class="block text-sm text-[#414942] leading-snug mt-0.5">Carousels and infographics for welfare schedules</span>
@@ -378,6 +583,11 @@ tailwind.config = { darkMode: "class", theme: { extend: { colors: {
           </article>
 
         </div>
+<div class="mt-8 flex justify-center sm:hidden">
+  <button type="button" id="exp-toggle" aria-controls="exp-list" aria-expanded="false" class="inline-flex items-center gap-1.5 h-11 px-6 rounded-full border-[1.5px] border-[#5E8F6E] text-[#2E4A3A] font-semibold text-sm bg-white/70 hover:bg-[#CDEBDD]/50 transition-colors">
+    <span data-label>See all (6)</span><span aria-hidden="true" class="material-symbols-outlined text-[18px] transition-transform duration-300">expand_more</span>
+  </button>
+</div>
       </div>
     </div>
   </section>
@@ -424,6 +634,39 @@ tailwind.config = { darkMode: "class", theme: { extend: { colors: {
     <div class="text-xs text-[#717971] font-label-mono uppercase tracking-wider">© 2026 ELFA. CRAFTED WITH CARE.</div>
   </div>
 </footer>
+
+
+<!-- ============ DESIGN GALLERY (bento overlay) ============ -->
+<dialog class="gallery-dialog" id="design-gallery" aria-labelledby="gallery-title">
+  <div class="gallery-shell">
+    <header class="gallery-head">
+      <div class="gallery-head-inner">
+        <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+          <button type="button" class="gallery-icon-btn" id="gallery-back" aria-label="Back to page"><span class="material-symbols-outlined" aria-hidden="true">arrow_back</span></button>
+          <div class="gallery-titles min-w-0">
+            <p class="font-label-mono text-sm font-semibold text-[#366648]" id="gallery-org"></p>
+            <h2 class="font-serif text-2xl sm:text-4xl text-[#1a3627] font-medium tracking-tight" id="gallery-title"></h2>
+          </div>
+        </div>
+        <button type="button" class="gallery-btn shrink-0" id="gallery-close" aria-label="Close"><span>Close</span><span class="material-symbols-outlined" aria-hidden="true">close</span></button>
+      </div>
+    </header>
+    <div class="gallery-body">
+      <p class="gallery-sub" id="gallery-sub"></p>
+      <div class="bento" id="gallery-grid"></div>
+      <section class="viewer" id="gallery-viewer" aria-live="polite" hidden>
+        <div class="viewer-stage">
+          <button type="button" class="viewer-nav" id="viewer-prev" aria-label="Previous design"><span class="material-symbols-outlined" aria-hidden="true">chevron_left</span></button>
+          <figure class="viewer-figure">
+            <img class="viewer-img" id="viewer-img" alt="">
+            <figcaption class="viewer-cap"><strong id="viewer-title"></strong><span id="viewer-meta"></span><span class="viewer-count font-label-mono" id="viewer-count"></span></figcaption>
+          </figure>
+          <button type="button" class="viewer-nav" id="viewer-next" aria-label="Next design"><span class="material-symbols-outlined" aria-hidden="true">chevron_right</span></button>
+        </div>
+      </section>
+    </div>
+  </div>
+</dialog>
 
 <script>
 // Mobile navigation toggle
@@ -481,6 +724,378 @@ tailwind.config = { darkMode: "class", theme: { extend: { colors: {
       img.src = m[1] + '.' + next;
     });
   });
+})();
+</script>
+<script>
+// Design gallery: overlay bento + viewer. Semua konten ada di GALLERIES (satu sumber data).
+(function () {
+  var GALLERIES = {
+  "graphic-designer": {
+    "title": "Graphic Designer",
+    "org": "Voluntiiran Yogyakarta",
+    "items": [
+      {
+        "id": "poster-cup-kertas",
+        "src": "images/gallery/voluntiiran/poster-cup-kertas.webp",
+        "w": 1200,
+        "h": 1500,
+        "title": "Open Recruitment · Cup Kertas & Kawat Bulu",
+        "meta": "Recruitment poster",
+        "alt": "Open recruitment volunteer poster for the Cup Kertas & Kawat Bulu creative project"
+      },
+      {
+        "id": "poster-konservasi-penyu",
+        "src": "images/gallery/voluntiiran/poster-konservasi-penyu.webp",
+        "w": 1200,
+        "h": 1500,
+        "title": "Open Recruitment · Konservasi Penyu & Tanam Pandan",
+        "meta": "Recruitment poster",
+        "alt": "Open recruitment volunteer poster for the sea turtle conservation and pandan planting activity"
+      },
+      {
+        "id": "poster-lukis-gypsum",
+        "src": "images/gallery/voluntiiran/poster-lukis-gypsum.webp",
+        "w": 1200,
+        "h": 1500,
+        "title": "Open Recruitment · Lukis Gypsum",
+        "meta": "Recruitment poster",
+        "alt": "Open recruitment volunteer poster for the Lukis Gypsum activity"
+      },
+      {
+        "id": "banner",
+        "src": "images/gallery/voluntiiran/banner-kawanrelawan.webp",
+        "w": 2000,
+        "h": 800,
+        "title": "Banner · #KawanRelawan",
+        "meta": "62.5 × 25 cm",
+        "alt": "Voluntiiran banner with the Sustainable Development Goals logo and the #KawanRelawan hashtag"
+      },
+      {
+        "id": "id-card",
+        "src": "images/gallery/voluntiiran/id-card-batch-iii.webp",
+        "w": 926,
+        "h": 1429,
+        "title": "Volunteer ID Card · Batch III Yogyakarta",
+        "meta": "ID card",
+        "alt": "Voluntiiran volunteer ID card, Batch III Yogyakarta"
+      },
+      {
+        "id": "lanyard",
+        "src": "images/gallery/voluntiiran/lanyard.webp",
+        "w": 1200,
+        "h": 1697,
+        "title": "Lanyard",
+        "meta": "90 × 2 cm",
+        "alt": "Voluntiiran Yogyakarta lanyard design"
+      }
+    ],
+    "rows": [
+      [
+        "poster-cup-kertas",
+        "poster-konservasi-penyu",
+        "poster-lukis-gypsum"
+      ],
+      [
+        "banner",
+        "id-card",
+        "lanyard"
+      ]
+    ]
+  },
+  "student-welfare": {
+    "title": "Student Welfare Staff",
+    "org": "KMTETI UGM",
+    "items": [
+      {
+        "id": "banner",
+        "src": "images/gallery/adkesma/banner-kunjungan-industri.webp",
+        "w": 2000,
+        "h": 667,
+        "title": "Banner · Kunjungan Industri 2026",
+        "meta": "150 × 50 cm",
+        "alt": "Kunjungan Industri 2026 banner for Keluarga Mahasiswa Teknik Elektro dan Teknologi Informasi, 28 to 30 October 2026, DKI Jakarta"
+      },
+      {
+        "id": "forwati",
+        "src": "images/gallery/adkesma/forwati.webp",
+        "w": 1200,
+        "h": 1500,
+        "title": "Forwati · Sosialisasi Kurikulum Baru DTETI",
+        "meta": "",
+        "alt": "Forwati (Forum Warga TETI) design: Sosialisasi Kurikulum Baru DTETI"
+      },
+      {
+        "id": "guidebook",
+        "src": "images/gallery/adkesma/guidebook-ki-2026.webp",
+        "w": 1200,
+        "h": 1697,
+        "title": "Guidebook · Kunjungan Industri 2026",
+        "meta": "Cover",
+        "alt": "Guidebook cover for Kunjungan Industri 2026"
+      },
+      {
+        "id": "live-report",
+        "src": "images/gallery/adkesma/live-report-ki-2026.webp",
+        "w": 1080,
+        "h": 1920,
+        "title": "Live Report · Kunjungan Industri 2026",
+        "meta": "Day 1",
+        "alt": "Live Report layout for Kunjungan Industri 2026, Day 1"
+      },
+      {
+        "id": "recap-cover",
+        "src": "images/gallery/adkesma/recap-cover.webp",
+        "w": 1200,
+        "h": 1500,
+        "title": "Recap · Kunjungan Industri Teknik Elektro",
+        "meta": "Cover",
+        "alt": "Recap Kunjungan Industri Teknik Elektro cover"
+      },
+      {
+        "id": "layout-1",
+        "src": "images/gallery/adkesma/photo-layout-1.webp",
+        "w": 1200,
+        "h": 1500,
+        "title": "Photo Layout 1",
+        "meta": "",
+        "alt": "Photo layout with students wearing safety helmets and vests"
+      },
+      {
+        "id": "layout-2",
+        "src": "images/gallery/adkesma/photo-layout-2.webp",
+        "w": 1200,
+        "h": 1500,
+        "title": "Photo Layout 2",
+        "meta": "",
+        "alt": "Photo layout of a person working at an electrical cabinet"
+      }
+    ],
+    "rows": [
+      [
+        "banner"
+      ],
+      [
+        "forwati",
+        "guidebook",
+        "live-report"
+      ],
+      [
+        "recap-cover",
+        "layout-1",
+        "layout-2"
+      ]
+    ]
+  },
+  "eventhub-ui": {
+    "title": "UI/UX Designer",
+    "org": "Google Developer Groups on Campus UGM",
+    "items": [
+      {
+        "id": "landing",
+        "src": "images/gallery/eventhub/landing-page.webp",
+        "w": 1200,
+        "h": 2832,
+        "title": "EventHub · Landing Page",
+        "meta": "Temukan Sponsorship yang Tepat Sasaran",
+        "alt": "EventHub landing page design, from the hero section to the footer"
+      },
+      {
+        "id": "dashboard",
+        "src": "images/gallery/eventhub/eo-dashboard.webp",
+        "w": 1444,
+        "h": 989,
+        "title": "Event Organizer Dashboard",
+        "meta": "Managed events, sponsorship pipeline, and latest proposals",
+        "alt": "EventHub event organizer dashboard design"
+      },
+      {
+        "id": "create-event",
+        "src": "images/gallery/eventhub/buat-event-step-1.webp",
+        "w": 1444,
+        "h": 1438,
+        "title": "Create Event · Step 1",
+        "meta": "Basic info, step 1 of 3",
+        "alt": "EventHub Create Event form, step 1 of 3: basic information"
+      }
+    ],
+    "rows": [
+      {
+        "split": [
+          "landing",
+          [
+            "dashboard",
+            "create-event"
+          ]
+        ],
+        "weights": [
+          440,
+          584
+        ]
+      }
+    ]
+  }
+};
+
+  var dlg = document.getElementById('design-gallery');
+  if (!dlg || typeof dlg.showModal !== 'function') return;
+  var $ = function (id) { return document.getElementById(id); };
+  var el = { org: $('gallery-org'), title: $('gallery-title'), sub: $('gallery-sub'), grid: $('gallery-grid'),
+    viewer: $('gallery-viewer'), img: $('viewer-img'), vtitle: $('viewer-title'), vmeta: $('viewer-meta'),
+    vcount: $('viewer-count'), back: $('gallery-back'), close: $('gallery-close'), prev: $('viewer-prev'), next: $('viewer-next'),
+    shell: dlg.querySelector('.gallery-shell') };
+  var state = { gallery: null, order: [], index: 0, opener: null };
+
+  // jumlah desain di tombol/chip diambil dari data
+  document.querySelectorAll('[data-gallery-count]').forEach(function (n) {
+    var g = GALLERIES[n.getAttribute('data-gallery-count')];
+    if (g) n.textContent = String(g.items.length);
+  });
+
+  function byId(g) { var m = {}; g.items.forEach(function (i) { m[i.id] = i; }); return m; }
+
+  function makeTile(it) {
+    var ratio = it.w / it.h;
+    var tile = document.createElement('figure');
+    tile.className = 'bento-tile' + (ratio > 2 ? ' is-wide' : '');
+    tile.style.setProperty('--r', ratio.toFixed(4));
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'bento-frame';
+    btn.setAttribute('data-id', it.id);
+    btn.setAttribute('aria-label', 'View larger: ' + it.title);
+    var img = document.createElement('img');
+    img.src = it.src; img.alt = it.alt; img.width = it.w; img.height = it.h;
+    img.loading = 'lazy'; img.decoding = 'async';
+    btn.appendChild(img);
+    var cap = document.createElement('figcaption');
+    cap.className = 'bento-cap';
+    var t = document.createElement('strong'); t.textContent = it.title; cap.appendChild(t);
+    if (it.meta) { var m = document.createElement('span'); m.textContent = it.meta; cap.appendChild(m); }
+    tile.appendChild(btn); tile.appendChild(cap);
+    state.order.push(it);
+    return tile;
+  }
+
+  // rows: ["id", ...] = satu baris rata tinggi; {split:[kiri,[atas,bawah]], weights:[a,b]} = kolom kiri tinggi + kolom kanan bertumpuk
+  function buildGrid(g) {
+    var map = byId(g);
+    el.grid.textContent = '';
+    state.order = [];
+    g.rows.forEach(function (row) {
+      var rowEl = document.createElement('div');
+      if (Array.isArray(row)) {
+        rowEl.className = 'bento-row';
+        row.forEach(function (id) { rowEl.appendChild(makeTile(map[id])); });
+      } else {
+        rowEl.className = 'bento-split';
+        row.split.forEach(function (col, i) {
+          var colEl = document.createElement('div');
+          colEl.className = 'bento-col';
+          colEl.style.setProperty('--w', row.weights[i]);
+          (Array.isArray(col) ? col : [col]).forEach(function (id) { colEl.appendChild(makeTile(map[id])); });
+          rowEl.appendChild(colEl);
+        });
+      }
+      el.grid.appendChild(rowEl);
+    });
+  }
+
+  function syncBack() {
+    el.back.setAttribute('aria-label', el.viewer.hidden ? 'Back to page' : 'Back to all designs');
+  }
+
+  function showGrid(focusId) {
+    el.viewer.hidden = true; el.grid.hidden = false; el.sub.hidden = false;
+    var btn = focusId && el.grid.querySelector('[data-id="' + focusId + '"]');
+    if (btn) btn.focus(); else el.close.focus();
+   syncBack();
+  }
+
+  function showViewer(i) {
+    var it = state.order[i]; if (!it) return;
+    state.index = i;
+    el.grid.hidden = true; el.sub.hidden = true; el.viewer.hidden = false;
+    el.img.src = it.src; el.img.alt = it.alt; el.img.width = it.w; el.img.height = it.h;
+    el.vtitle.textContent = it.title; el.vmeta.textContent = it.meta || ''; el.vmeta.hidden = !it.meta;
+    el.vcount.textContent = (i + 1) + ' / ' + state.order.length;
+    el.prev.disabled = i === 0; el.next.disabled = i === state.order.length - 1;
+    el.shell.scrollTop = 0;
+    [i - 1, i + 1].forEach(function (j) { if (state.order[j]) { new Image().src = state.order[j].src; } });
+   syncBack();
+  }
+
+  function open(key, focusId, opener) {
+    var g = GALLERIES[key]; if (!g) return;
+    state.gallery = g; state.opener = opener || null;
+    el.org.textContent = g.org; el.title.textContent = g.title;
+    el.sub.textContent = 'Design works · ' + g.items.length + ' · Select a design to view it larger';
+    buildGrid(g);
+    el.viewer.hidden = true; el.grid.hidden = false; el.sub.hidden = false;
+    document.documentElement.classList.add('gallery-lock');
+    dlg.showModal();
+    el.shell.scrollTop = 0;
+    var target = focusId && el.grid.querySelector('[data-id="' + focusId + '"]');
+    if (target) target.focus({ preventScroll: true }); else el.close.focus();
+   syncBack();
+  }
+
+  document.addEventListener('click', function (e) {
+    var trigger = e.target.closest && e.target.closest('.gallery-open');
+    if (!trigger) return;
+    open(trigger.getAttribute('data-gallery'), trigger.getAttribute('data-focus'), trigger);
+  });
+  el.grid.addEventListener('click', function (e) {
+    var btn = e.target.closest('.bento-frame'); if (!btn) return;
+    var id = btn.getAttribute('data-id');
+    showViewer(state.order.findIndex(function (it) { return it.id === id; }));
+  });
+  el.back.addEventListener('click', function () { if (el.viewer.hidden) { dlg.close(); } else { showGrid(state.order[state.index] && state.order[state.index].id); } });
+  el.close.addEventListener('click', function () { dlg.close(); });
+  el.prev.addEventListener('click', function () { showViewer(state.index - 1); });
+  el.next.addEventListener('click', function () { showViewer(state.index + 1); });
+
+  // Esc: dari viewer kembali ke bento dulu; Esc berikutnya menutup overlay
+  dlg.addEventListener('cancel', function (e) {
+    if (!el.viewer.hidden) { e.preventDefault(); showGrid(state.order[state.index] && state.order[state.index].id); }
+  });
+  dlg.addEventListener('keydown', function (e) {
+    if (el.viewer.hidden) return;
+    if (e.key === 'ArrowLeft' && state.index > 0) { e.preventDefault(); showViewer(state.index - 1); }
+    if (e.key === 'ArrowRight' && state.index < state.order.length - 1) { e.preventDefault(); showViewer(state.index + 1); }
+  });
+  dlg.addEventListener('close', function () {
+    document.documentElement.classList.remove('gallery-lock');
+    if (state.opener && document.contains(state.opener)) state.opener.focus();
+  });
+})();
+</script>
+<script>
+(function(){
+  var list=document.getElementById('exp-list'), btn=document.getElementById('exp-toggle');
+  if(!list||!btn){return;}
+  var label=btn.querySelector('[data-label]'), icon=btn.querySelector('.material-symbols-outlined');
+  var extras=list.querySelectorAll('.exp-extra'), total=list.querySelectorAll('article').length, KEY='expExpanded';
+  function set(open,persist){
+    list.classList.toggle('is-expanded',open);
+    btn.setAttribute('aria-expanded',String(open));
+    label.textContent=open?'Show less':'See all ('+total+')';
+    icon.style.transform=open?'rotate(180deg)':'';
+    if(open){Array.prototype.forEach.call(extras,function(a){a.classList.add('is-visible');});}
+    if(persist){try{sessionStorage.setItem(KEY,open?'1':'0');}catch(e){}}
+  }
+  function revealHash(){
+    if(!location.hash){return;}
+    var t=document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if(t&&t.closest('.exp-extra')&&!list.classList.contains('is-expanded')){set(true,true);t.scrollIntoView({block:'start'});}
+  }
+  btn.addEventListener('click',function(){
+    var open=!list.classList.contains('is-expanded');
+    set(open,true);
+    if(!open){list.scrollIntoView({block:'start'});}
+  });
+  try{if(sessionStorage.getItem(KEY)==='1'){set(true,false);}}catch(e){}
+  revealHash();
+  window.addEventListener('hashchange',revealHash);
 })();
 </script>
 </body>
